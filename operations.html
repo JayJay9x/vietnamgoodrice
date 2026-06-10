@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Operations & Capacity | Vietnam Good Rice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:ital,wght@0,600;0,700;1,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#00210d",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-primary": "#96d5a3",
+                        "outline-variant": "#c0c9be",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-bright": "#fcf9f2",
+                        "surface-variant": "#e5e2db",
+                        "surface-container-highest": "#e5e2db",
+                        "surface": "#fcf9f2",
+                        "primary-fixed-dim": "#96d5a3",
+                        "on-tertiary-container": "#b9b7b6",
+                        "surface-dim": "#dcdad3",
+                        "on-primary-container": "#87c695",
+                        "secondary-fixed": "#ffdf9e",
+                        "primary-fixed": "#b1f2be",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "on-surface-variant": "#404941",
+                        "surface-container": "#f0eee7",
+                        "surface-container-low": "#f6f3ec",
+                        "on-primary-fixed-variant": "#12512c",
+                        "on-background": "#1c1c18",
+                        "tertiary": "#323232",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#ebe8e1",
+                        "secondary-fixed-dim": "#ebc166",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#2e6a41",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fcf9f2",
+                        "on-secondary-fixed-variant": "#5b4300",
+                        "secondary-container": "#fdd275",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f3f0ea",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#775800",
+                        "tertiary-fixed": "#e5e2e1",
+                        "primary-container": "#14532d",
+                        "primary": "#003b1b",
+                        "on-surface": "#1c1c18",
+                        "inverse-surface": "#31312c",
+                        "secondary": "#795902",
+                        "tertiary-container": "#494848",
+                        "outline": "#717970"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "stack-md": "16px",
+                        "section-gap": "80px",
+                        "margin-desktop": "64px",
+                        "stack-sm": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "display-lg": ["Noto Serif"],
+                        "title-lg": ["Inter"],
+                        "headline-md": ["Noto Serif"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Noto Serif"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg-mobile": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-lg": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-overlay {
+            background: linear-gradient(rgba(0, 59, 27, 0.7), rgba(0, 59, 27, 0.4));
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: #c0c9be;
+            z-index: 0;
+        }
+        @media (max-width: 768px) {
+            .step-connector::after { display: none; }
+        }
+    </style>
+<meta name="description" content="A An, a member of Tan Long Group - a leading Vietnamese rice producer and exporter. Consistent quality, on-time delivery, professional export documentation, and full end-to-end operational capability."/>
+<meta name="theme-color" content="#14532D"/>
+<link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
+<link rel="manifest" href="manifest.json"/>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<header class="bg-surface sticky top-0 border-b border-outline-variant shadow-sm z-50"><nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto"><a href="index.html" class="flex flex-col leading-tight"><span class="font-display-lg text-title-lg font-bold text-primary">Vietnam Good Rice</span><span class="text-[11px] uppercase tracking-wider text-on-surface-variant">A member of Tan Long Group</span></a><div class="hidden lg:flex items-center gap-8"><div class="flex gap-6"><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="about.html">About</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="products.html">Products</a><a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="operations.html">Operations</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="quality.html">Quality</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="tenders.html">Tenders</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="track.html">Track Shipment</a></div><div class="h-6 w-px bg-outline-variant"></div><div class="flex items-center gap-4"><div class="relative"><button id="lang-btn" onclick="event.stopPropagation();vgrToggle('lang-menu')" class="text-on-surface-variant font-label-md flex items-center gap-1 hover:text-primary">EN <span class="material-symbols-outlined text-[18px]">expand_more</span></button><div id="lang-menu" class="hidden absolute right-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-lg py-2 z-50"><button class="w-full text-left px-4 py-2 text-sm text-primary font-semibold flex items-center justify-between"><span>English</span><span class="material-symbols-outlined text-[18px]">check</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>简体中文</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>العربية</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>Français</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>Español</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>한국어</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>日本語</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>Filipino</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button></div></div><a href="quote.html" class="bg-secondary text-white px-6 py-2.5 rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all">Request a Quote</a></div></div><button class="lg:hidden p-2" onclick="vgrToggle('mobile-menu')"><span class="material-symbols-outlined text-primary">menu</span></button></nav><div class="hidden lg:hidden bg-surface border-t border-outline-variant p-6 space-y-4" id="mobile-menu"><a class="block font-label-md text-on-surface" href="about.html">About</a><a class="block font-label-md text-on-surface" href="products.html">Products</a><a class="block font-label-md text-primary font-semibold" href="operations.html">Operations</a><a class="block font-label-md text-on-surface" href="quality.html">Quality</a><a class="block font-label-md text-on-surface" href="tenders.html">Tenders</a><a class="block font-label-md text-on-surface" href="track.html">Track Shipment</a><a class="block font-label-md text-on-surface" href="partners.html">For Volume Partners</a><div class="pt-4 flex flex-col gap-3"><a href="quote.html" class="block text-center w-full bg-secondary text-white py-3 rounded-lg font-label-md">Request a Quote</a><div class="text-xs text-on-surface-variant">Language: English (more languages coming soon)</div></div></div></header>
+<main class="">
+<!-- Section 1: Hero -->
+<section class="relative h-[819px] flex items-center overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A wide-angle, cinematic view of a massive, state-of-the-art agricultural milling facility at dusk. The scene features towering silver grain silos and sleek industrial architecture reflecting warm twilight colors. The lighting is sophisticated, emphasizing the scale and modern precision of the operation. The overall mood is authoritative, clean, and technologically advanced, aligned with a corporate professional aesthetic in deep greens and metallic silvers." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_9tdWjNN92ENhrrbGXee4NRCo-BRaRceTVRso0TACy-XDtRMAoMMwVoC1YCx6ZGwaKFKqJm9Mcn-lJ2WBrgvwVv4w9FKnqVOH7YgdEPrdIynT_t8kmq41stO1qE1C0nBIKeqxvTqzk0bLu4a25Vcz85HV_umgJrPFTNLOh7t0ZsUtdP4JkCz76D0JHWxU2EKfYKsbSZwbUQz1msx4b4US1ycSshJLhTTFxn35Bop7zP98NbUfQ3Jb_pDSYhSvln587a3_ho4KJPw');">
+</div>
+<div class="absolute inset-0 hero-overlay"></div>
+<div class="relative w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-on-primary">
+<div class="max-w-2xl">
+<h1 class="font-display-lg text-[40px] md:text-display-lg mb-stack-md leading-tight">Built for Reliability at Scale</h1>
+<p class="font-body-lg text-body-lg opacity-90 mb-stack-lg">From paddy sourcing to final export delivery, we maintain absolute control over every stage of the rice supply chain.</p>
+<div class="flex gap-4">
+<button class="bg-secondary text-on-primary px-8 py-3 rounded-lg font-label-md hover:brightness-110 transition-all">Download Capacity Report</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Integrated Value Chain -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-section-gap">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-sm">Integrated Value Chain</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto">Our vertical integration ensures transparency and quality from the Mekong Delta to the global table.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-gutter relative">
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mb-stack-md border border-outline-variant group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">agriculture</span>
+</div>
+<div class="hidden md:block absolute top-8 left-[60%] w-full h-[1px] bg-outline-variant -z-10"></div>
+<h3 class="font-title-lg text-title-lg mb-2">Paddy Sourcing</h3>
+<p class="text-label-sm text-on-surface-variant">Mekong Delta regions, stable year-round supply.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mb-stack-md border border-outline-variant group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">factory</span>
+</div>
+<div class="hidden md:block absolute top-8 left-[60%] w-full h-[1px] bg-outline-variant -z-10"></div>
+<h3 class="font-title-lg text-title-lg mb-2">Milling &amp; Polishing</h3>
+<p class="text-label-sm text-on-surface-variant">5 modern factories with European technology.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mb-stack-md border border-outline-variant group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">inventory_2</span>
+</div>
+<div class="hidden md:block absolute top-8 left-[60%] w-full h-[1px] bg-outline-variant -z-10"></div>
+<h3 class="font-title-lg text-title-lg mb-2">Packaging</h3>
+<p class="text-label-sm text-on-surface-variant">Flexible bag options and white-label branding.</p>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mb-stack-md border border-outline-variant group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">local_shipping</span>
+</div>
+<div class="hidden md:block absolute top-8 left-[60%] w-full h-[1px] bg-outline-variant -z-10"></div>
+<h3 class="font-title-lg text-title-lg mb-2">1PL Logistics</h3>
+<p class="text-label-sm text-on-surface-variant">Mekong Sonic Logistics self-controlled fleet.</p>
+</div>
+<!-- Step 5 -->
+<div class="relative z-10 flex flex-col items-center text-center group">
+<div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mb-stack-md border border-outline-variant group-hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl">public</span>
+</div>
+<h3 class="font-title-lg text-title-lg mb-2">Export &amp; Delivery</h3>
+<p class="text-label-sm text-on-surface-variant">10+ years expert team in global delivery.</p>
+</div>
+</div>
+</section>
+<!-- Section 3: Capacity KPI Band -->
+<section class="bg-primary text-on-primary py-16">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter text-center">
+<div>
+<div class="font-display-lg text-4xl mb-2">5</div>
+<div class="font-label-md uppercase tracking-wider opacity-80">Milling Facilities</div>
+</div>
+<div>
+<div class="font-display-lg text-4xl mb-2">15,000+</div>
+<div class="font-label-md uppercase tracking-wider opacity-80">Tons/Day Capacity</div>
+</div>
+<div>
+<div class="font-display-lg text-4xl mb-2">Own 1PL</div>
+<div class="font-label-md uppercase tracking-wider opacity-80">Dedicated Fleet</div>
+</div>
+<div>
+<div class="font-display-lg text-4xl mb-2">10+</div>
+<div class="font-label-md uppercase tracking-wider opacity-80">Years Experience</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Hanh Phuc Rice Mill Highlight -->
+<section class="py-section-gap overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-section-gap items-center">
+<div>
+<span class="text-secondary font-label-md uppercase tracking-widest mb-stack-sm block">Flagship Facility</span>
+<h2 class="font-display-lg text-[32px] md:text-display-lg text-primary mb-stack-md">Hanh Phuc Rice Mill: The Largest in Asia</h2>
+<p class="text-body-lg text-on-surface-variant mb-stack-lg leading-relaxed">
+                            161,000 m² in An Giang Province. Built with European-standard technology, this facility features massive drying and storage capacity to ensure year-round supply stability for our global partners.
+                        </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<span class="font-body-md">Advanced sorting and polishing lines</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<span class="font-body-md">Climate-controlled silos for freshness</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<span class="font-body-md">Fully automated packaging system</span>
+</li>
+</ul>
+</div>
+<div class="relative group">
+<div class="aspect-video rounded-xl overflow-hidden shadow-2xl">
+<img alt="Aerial photograph of the Hanh Phuc Rice Mill" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" data-alt="An expansive, high-angle aerial view of a colossal, modern agricultural complex situated in a lush tropical landscape. The facility features massive white and grey silos, expansive industrial roofs, and neat rows of processing units. The lighting is bright and clear, emphasizing the clean, efficient layout of the site. The style is professional and industrial, showcasing architectural grandeur and massive operational scale under a bright blue sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgZvDMlDo82353Y3DnZR1AAum6r44UcAQoJQ_qRXERA6LAFqB3RECodKZRyGLU_teesOdORJL2FS36zy5Vz99wTxU3j-17IaOXuvI-oX5sbpnR28Dj1kbrgwPh3aynqbySEgKLN-j8wAEJHaCKcEKeXOItvjwakcoH1hX2vkCBLwMAxL1BzFrzN_JhT6rf2t3CsVMqX1efN98Th2kiEWhfA2bK8DVYg--AcOvbW3rzHWHojFPFyYZlpct3e4mwNRiRWF1pDPBCec0"/>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-white p-6 shadow-xl rounded-lg hidden md:block">
+<div class="text-primary font-display-lg text-2xl">161,000 m²</div>
+<div class="text-on-surface-variant font-label-sm">Operational Footprint</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Logistics Deep-Dive -->
+<section class="bg-surface-container py-section-gap">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="bg-white rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-sm border border-outline-variant">
+<div class="w-full md:w-1/2 p-12 flex flex-col justify-center">
+<h3 class="font-headline-md text-headline-md text-primary mb-stack-md">Mekong Sonic Logistics</h3>
+<p class="text-body-lg text-on-surface-variant mb-stack-lg leading-relaxed">
+                            Our in-house 1PL advantage ensures route control, vessel-schedule discipline, and minimized delay risks. We don't just find space; we own the movement.
+                        </p>
+<div class="grid grid-cols-2 gap-gutter">
+<div class="border-l-4 border-secondary pl-4">
+<div class="font-display-lg text-2xl text-primary">Zero</div>
+<div class="text-label-sm opacity-70">Broker Dependency</div>
+</div>
+<div class="border-l-4 border-secondary pl-4">
+<div class="font-display-lg text-2xl text-primary">100%</div>
+<div class="text-label-sm opacity-70">Schedule Control</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 min-h-[400px] bg-cover bg-center" data-alt="Close-up artistic shot of a line of modern green logistics trucks at a professional loading bay during early morning. Soft mist and professional high-key lighting create a sense of reliability and movement. The color palette is dominated by the brand's deep paddy green and crisp white, conveying a high-end corporate logistics identity focused on precision and timely delivery in a calm, focused environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB78afXTzz_XDsXISc_VNQyw0tgk5iPrV7Q2eQHxToUj9Kj53gSsNZLno-bi90M0yChH6kiIxjYdJnE1jqQBpkIyycsL9bPgtZug35G7fbzyiNNcnvlQj9WaEz1DzdzYPg6b1A4i7csCLc9YilNhjvkb3BlCors9rlarvPqe6WiWY1P1VFpArYSopm5rsxaQHX-My4FXEe0tQEAJZh37XsNH3e6if8bkdhja4iLkbp2hguXu8F_9_mE4VS1FzVtQtIoZ4HKsmrmxws');">
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: One Point of Coordination -->
+<section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-section-gap items-center">
+<div class="order-2 lg:order-1">
+<!-- Diagram Placeholder / Stylized Grid -->
+<div class="relative h-[400px] flex items-center justify-center">
+<div class="absolute w-24 h-24 bg-primary text-on-primary rounded-full flex items-center justify-center z-20 shadow-lg outline outline-8 outline-white">
+<div class="text-center">
+<div class="font-label-md leading-none">VGR</div>
+<div class="text-[10px] uppercase">HQ</div>
+</div>
+</div>
+<!-- Connecting lines & outer hubs -->
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-[300px] h-[300px] border-2 border-dashed border-outline rounded-full animate-[spin_20s_linear_infinite]"></div>
+</div>
+<div class="absolute transform -translate-y-36 flex flex-col items-center">
+<div class="bg-white p-3 rounded-lg shadow-md border border-outline-variant">
+<span class="material-symbols-outlined text-primary">payments</span>
+<div class="text-[10px] font-bold uppercase mt-1">Sales</div>
+</div>
+</div>
+<div class="absolute transform translate-y-36 flex flex-col items-center">
+<div class="bg-white p-3 rounded-lg shadow-md border border-outline-variant">
+<span class="material-symbols-outlined text-primary">factory</span>
+<div class="text-[10px] font-bold uppercase mt-1">Factories</div>
+</div>
+</div>
+<div class="absolute transform -translate-x-36 flex flex-col items-center">
+<div class="bg-white p-3 rounded-lg shadow-md border border-outline-variant">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+<div class="text-[10px] font-bold uppercase mt-1">Logistics</div>
+</div>
+</div>
+<div class="absolute transform translate-x-36 flex flex-col items-center">
+<div class="bg-white p-3 rounded-lg shadow-md border border-outline-variant">
+<span class="material-symbols-outlined text-primary">description</span>
+<div class="text-[10px] font-bold uppercase mt-1">Docs</div>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="font-display-lg text-[32px] md:text-display-lg text-primary mb-stack-md">One Point of Coordination</h2>
+<p class="text-body-lg text-on-surface-variant mb-stack-lg leading-relaxed">
+                        We eliminate the complexity of multi-vendor supply chains. From contract signing to bill of lading, you communicate with one dedicated team overseeing every variable.
+                    </p>
+<div class="p-6 bg-surface-container-low border border-outline-variant rounded-xl italic font-serif text-primary">
+                        "Transparent, fast, and accountable operations at every touchpoint."
+                    </div>
+</div>
+</div>
+</section>
+<!-- Section 7: CTA -->
+<section class="py-section-gap bg-surface">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="bg-primary-container p-12 md:p-20 rounded-3xl text-center relative overflow-hidden">
+<!-- Subtle pattern background -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#ffffff 2px, transparent 2px); background-size: 32px 32px;"></div>
+<div class="relative z-10">
+<h2 class="font-display-lg text-[32px] md:text-4xl text-on-primary mb-stack-md">Let's build a long-term rice supply partnership</h2>
+<p class="text-on-primary opacity-80 mb-stack-lg max-w-2xl mx-auto text-lg">Contact our trade desk to discuss capacity reservations and logistics planning for the upcoming harvest season.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-secondary text-on-primary px-10 py-4 rounded-lg font-label-md text-lg hover:brightness-110 transition-all shadow-lg" onclick="location.href='quote.html'" style="cursor:pointer">Request a Quote</button>
+<button class="bg-transparent border border-on-primary text-on-primary px-10 py-4 rounded-lg font-label-md text-lg hover:bg-white/10 transition-all" onclick="location.href='quote.html'" style="cursor:pointer">Speak to Logistics Expert</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container border-t border-outline-variant py-stack-lg"><div class="w-full px-margin-mobile md:px-margin-desktop py-stack-lg max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter"><div class="space-y-4"><span class="font-display-lg text-headline-sm text-primary">Vietnam Good Rice</span><p class="text-on-surface-variant text-sm leading-relaxed">A An Joint Stock Company<br/>(Cong ty Co phan Luong thuc A An)<br/>14th Floor, Diamond Flower Tower,<br/>48 Le Van Luong St., N1 New Urban Area,<br/>Yen Hoa Ward, Hanoi, Vietnam</p><p class="text-on-surface-variant text-xs">A member of Tan Long Group</p></div><div class="space-y-4"><h4 class="font-label-md text-primary">Company</h4><ul class="space-y-2 text-sm"><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="about.html">About A An</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="operations.html">Operations &amp; Capacity</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="products.html">Rice Portfolio</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="partners.html">For Volume Partners</a></li></ul></div><div class="space-y-4"><h4 class="font-label-md text-primary">Services</h4><ul class="space-y-2 text-sm"><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="quality.html">Quality &amp; Compliance</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="tenders.html">Government Tenders</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="track.html">Track Your Shipment</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="quote.html">Request a Quote</a></li></ul></div><div class="space-y-4"><h4 class="font-label-md text-primary">Export Desk</h4><div class="bg-surface p-4 rounded-xl border border-outline-variant space-y-1"><p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Contact</p><p class="text-on-surface font-semibold">Mr. Jay</p><p class="text-primary font-bold">+84 396 529 995</p><p class="text-on-surface-variant text-sm">hoadt@aan.vn</p></div></div></div><div class="border-t border-outline-variant mt-12 pt-8 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4"><p class="text-on-surface-variant text-xs">&copy; 2026 Vietnam Good Rice - A An JSC, Tan Long Group. All rights reserved.</p><div class="flex gap-6 text-xs text-on-surface-variant"><span>Built for Global Trade</span><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">language</span> English (Global)</span></div></div></footer>
+<script>
+        // Micro-interaction for the navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md', 'bg-white');
+                header.classList.remove('bg-surface/90');
+            } else {
+                header.classList.remove('shadow-md', 'bg-white');
+                header.classList.add('bg-surface/90');
+            }
+        });
+    </script>
+<script>function vgrToggle(id){var e=document.getElementById(id); if(e) e.classList.toggle("hidden");}document.addEventListener("click",function(ev){var d=document.getElementById("lang-menu"), b=document.getElementById("lang-btn");if(d&&b&&!d.classList.contains("hidden")&&!d.contains(ev.target)&&!b.contains(ev.target)){d.classList.add("hidden");}});</script>
+</body></html>

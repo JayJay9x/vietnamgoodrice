@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Design System | Vietnam Good Rice</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Serif:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#b9b7b6",
+                        "inverse-surface": "#31312c",
+                        "secondary-fixed": "#ffdf9e",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#775800",
+                        "outline-variant": "#c0c9be",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e5e2db",
+                        "surface-dim": "#dcdad3",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#404941",
+                        "secondary": "#795902",
+                        "surface-container": "#f0eee7",
+                        "inverse-primary": "#96d5a3",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-container-low": "#f6f3ec",
+                        "on-primary-container": "#87c695",
+                        "surface-tint": "#2e6a41",
+                        "secondary-fixed-dim": "#ebc166",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-surface": "#1c1c18",
+                        "primary-fixed-dim": "#96d5a3",
+                        "tertiary-container": "#494848",
+                        "on-primary-fixed": "#00210d",
+                        "on-primary": "#ffffff",
+                        "outline": "#717970",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#fdd275",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-error": "#ffffff",
+                        "on-background": "#1c1c18",
+                        "background": "#fcf9f2",
+                        "surface-container-high": "#ebe8e1",
+                        "surface-variant": "#e5e2db",
+                        "tertiary": "#323232",
+                        "inverse-on-surface": "#f3f0ea",
+                        "primary-container": "#14532d",
+                        "surface": "#fcf9f2",
+                        "primary-fixed": "#b1f2be",
+                        "surface-bright": "#fcf9f2",
+                        "on-secondary-fixed-variant": "#5b4300",
+                        "primary": "#003b1b",
+                        "on-primary-fixed-variant": "#12512c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Noto Serif"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Noto Serif"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Noto Serif"],
+                        "title-lg": ["Inter"],
+                        "display-lg-mobile": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "title-lg": ["20px", {"lineHeight": "1.5", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .paper-texture {
+            background-color: #faf7f0;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 30px -10px rgba(20, 83, 45, 0.08);
+        }
+        body {
+            background-color: #FAF7F0;
+        }
+    </style>
+<meta name="description" content="A An, a member of Tan Long Group - a leading Vietnamese rice producer and exporter. Consistent quality, on-time delivery, professional export documentation, and full end-to-end operational capability."/>
+<meta name="theme-color" content="#14532D"/>
+<link rel="icon" type="image/png" href="assets/favicon.png"/>
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png"/>
+<link rel="manifest" href="manifest.json"/>
+</head>
+<body class="font-body-md text-on-background selection:bg-primary-fixed-dim selection:text-primary">
+<header class="bg-surface sticky top-0 border-b border-outline-variant shadow-sm z-50"><nav class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto"><a href="index.html" class="flex flex-col leading-tight"><span class="font-display-lg text-title-lg font-bold text-primary">Vietnam Good Rice</span><span class="text-[11px] uppercase tracking-wider text-on-surface-variant">A member of Tan Long Group</span></a><div class="hidden lg:flex items-center gap-8"><div class="flex gap-6"><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="about.html">About</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="products.html">Products</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="operations.html">Operations</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="quality.html">Quality</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="tenders.html">Tenders</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="track.html">Track Shipment</a></div><div class="h-6 w-px bg-outline-variant"></div><div class="flex items-center gap-4"><div class="relative"><button id="lang-btn" onclick="event.stopPropagation();vgrToggle('lang-menu')" class="text-on-surface-variant font-label-md flex items-center gap-1 hover:text-primary">EN <span class="material-symbols-outlined text-[18px]">expand_more</span></button><div id="lang-menu" class="hidden absolute right-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-lg py-2 z-50"><button class="w-full text-left px-4 py-2 text-sm text-primary font-semibold flex items-center justify-between"><span>English</span><span class="material-symbols-outlined text-[18px]">check</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>简体中文</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>العربية</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>Français</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>Español</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>한국어</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>日本語</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button><button disabled class="w-full text-left px-4 py-2 text-sm text-on-surface-variant flex items-center justify-between opacity-70 cursor-not-allowed"><span>Filipino</span><span class="text-[10px] uppercase tracking-wider bg-surface-container px-2 py-0.5 rounded-full">soon</span></button></div></div><a href="quote.html" class="bg-secondary text-white px-6 py-2.5 rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all">Request a Quote</a></div></div><button class="lg:hidden p-2" onclick="vgrToggle('mobile-menu')"><span class="material-symbols-outlined text-primary">menu</span></button></nav><div class="hidden lg:hidden bg-surface border-t border-outline-variant p-6 space-y-4" id="mobile-menu"><a class="block font-label-md text-on-surface" href="about.html">About</a><a class="block font-label-md text-on-surface" href="products.html">Products</a><a class="block font-label-md text-on-surface" href="operations.html">Operations</a><a class="block font-label-md text-on-surface" href="quality.html">Quality</a><a class="block font-label-md text-on-surface" href="tenders.html">Tenders</a><a class="block font-label-md text-on-surface" href="track.html">Track Shipment</a><a class="block font-label-md text-on-surface" href="partners.html">For Volume Partners</a><div class="pt-4 flex flex-col gap-3"><a href="quote.html" class="block text-center w-full bg-secondary text-white py-3 rounded-lg font-label-md">Request a Quote</a><div class="text-xs text-on-surface-variant">Language: English (more languages coming soon)</div></div></div></header>
+<main class="pt-32 pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Header Section -->
+<header class="mb-section-gap">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">Master Brand Portal</span>
+<h1 class="font-display-lg text-display-lg text-primary">Brand Identity &amp; Style Guide</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-4">
+                    This document defines the visual architecture of Vietnam Good Rice. It ensures consistency across all touchpoints, bridging traditional agricultural excellence with modern corporate precision.
+                </p>
+</div>
+</header>
+<!-- Color Palette Section -->
+<section class="mb-section-gap">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-lg flex items-center gap-3">
+<span class="w-8 h-[2px] bg-secondary-container"></span> Color Architecture
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-gutter">
+<!-- Paddy Green -->
+<div class="flex flex-col gap-stack-sm">
+<div class="h-48 w-full rounded-xl bg-primary-container custom-shadow flex items-end p-4 border border-outline-variant/10">
+<span class="text-white font-label-md text-label-md">Deep Paddy Green</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hex Code</span>
+<span class="font-title-lg text-title-lg text-primary">#14532D</span>
+</div>
+</div>
+<!-- Rice Gold -->
+<div class="flex flex-col gap-stack-sm">
+<div class="h-48 w-full rounded-xl bg-secondary-container custom-shadow flex items-end p-4 border border-outline-variant/10">
+<span class="text-on-secondary-container font-label-md text-label-md">Warm Rice Gold</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hex Code</span>
+<span class="font-title-lg text-title-lg text-primary">#C9A24B</span>
+</div>
+</div>
+<!-- Charcoal -->
+<div class="flex flex-col gap-stack-sm">
+<div class="h-48 w-full rounded-xl bg-on-surface custom-shadow flex items-end p-4 border border-outline-variant/10">
+<span class="text-white font-label-md text-label-md">Charcoal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hex Code</span>
+<span class="font-title-lg text-title-lg text-primary">#1A1A1A</span>
+</div>
+</div>
+<!-- Off-white -->
+<div class="flex flex-col gap-stack-sm">
+<div class="h-48 w-full rounded-xl bg-surface-container custom-shadow flex items-end p-4 border border-outline-variant/10">
+<span class="text-primary font-label-md text-label-md">Off-white (Paper)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hex Code</span>
+<span class="font-title-lg text-title-lg text-primary">#FAF7F0</span>
+</div>
+</div>
+<!-- White -->
+<div class="flex flex-col gap-stack-sm">
+<div class="h-48 w-full rounded-xl bg-white custom-shadow flex items-end p-4 border border-outline-variant">
+<span class="text-primary font-label-md text-label-md border-b">White</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hex Code</span>
+<span class="font-title-lg text-title-lg text-primary">#FFFFFF</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Typography & UI Components Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-section-gap">
+<!-- Typography Section -->
+<section class="lg:col-span-7">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-lg flex items-center gap-3">
+<span class="w-8 h-[2px] bg-secondary-container"></span> Typography Scale
+                </h2>
+<div class="space-y-stack-lg bg-white p-stack-lg rounded-xl custom-shadow border border-outline-variant">
+<div class="flex items-baseline justify-between border-b border-outline-variant/30 pb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">H1 Display</span>
+<h1 class="font-display-lg text-display-lg text-primary">Noto Serif Bold</h1>
+</div>
+<div class="flex items-baseline justify-between border-b border-outline-variant/30 pb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">H2 Headline</span>
+<h2 class="font-headline-md text-headline-md text-primary">The Art of Vietnamese Grain</h2>
+</div>
+<div class="flex items-baseline justify-between border-b border-outline-variant/30 pb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Body Large</span>
+<p class="font-body-lg text-body-lg text-on-surface">Inter Regular — 18px / 1.6 Line Height</p>
+</div>
+<div class="flex items-baseline justify-between border-b border-outline-variant/30 pb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Body Medium</span>
+<p class="font-body-md text-body-md text-on-surface-variant">Our rice is harvested at the peak of perfection in the Mekong Delta, ensuring maximum aroma and nutrient retention.</p>
+</div>
+<div class="flex items-baseline justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">UI Label</span>
+<p class="font-label-md text-label-md text-secondary">Inter SemiBold — 14px Uppercase</p>
+</div>
+</div>
+</section>
+<!-- Buttons & Badges -->
+<section class="lg:col-span-5">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-lg flex items-center gap-3">
+<span class="w-8 h-[2px] bg-secondary-container"></span> UI Components
+                </h2>
+<div class="bg-white p-stack-lg rounded-xl custom-shadow border border-outline-variant flex flex-col gap-stack-lg">
+<!-- Buttons -->
+<div class="flex flex-col gap-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Action Hierarchy</span>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md text-label-md custom-shadow hover:opacity-90 active:scale-95 transition-all">Primary Action</button>
+<button class="border border-primary text-primary px-6 py-3 rounded-lg font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95">Secondary</button>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-lg font-label-md text-label-md hover:brightness-95 active:scale-95 transition-all">Gold Accent</button>
+</div>
+</div>
+<!-- Badges -->
+<div class="flex flex-col gap-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Credential Chips</span>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-secondary-container/20 border border-secondary/30 text-primary font-label-sm text-label-sm rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span> ISO 9001
+                            </span>
+<span class="px-3 py-1 bg-secondary-container/20 border border-secondary/30 text-primary font-label-sm text-label-sm rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">eco</span> HACCP
+                            </span>
+<span class="px-3 py-1 bg-secondary-container/20 border border-secondary/30 text-primary font-label-sm text-label-sm rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">public</span> GLOBAL GAP
+                            </span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- KPI Stats & Product Card -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter mt-section-gap">
+<!-- KPI Blocks -->
+<div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-primary p-stack-lg rounded-xl custom-shadow text-on-primary flex flex-col justify-between">
+<span class="material-symbols-outlined text-secondary-fixed text-4xl">travel_explore</span>
+<div class="mt-8">
+<h3 class="font-display-lg text-4xl mb-2">50+</h3>
+<p class="font-body-md text-on-primary/80 uppercase tracking-wider">Countries Exported</p>
+</div>
+</div>
+<div class="bg-white p-stack-lg rounded-xl border border-outline-variant custom-shadow flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary text-4xl">factory</span>
+<div class="mt-8">
+<h3 class="font-display-lg text-4xl text-primary mb-2">1.2M Tons</h3>
+<p class="font-body-md text-on-surface-variant uppercase tracking-wider">Annual Capacity</p>
+</div>
+</div>
+<div class="bg-surface-container p-stack-lg rounded-xl border border-outline-variant custom-shadow flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary text-4xl">biotech</span>
+<div class="mt-8">
+<h3 class="font-display-lg text-4xl text-primary mb-2">99.9%</h3>
+<p class="font-body-md text-on-surface-variant uppercase tracking-wider">Purity Rating</p>
+</div>
+</div>
+<div class="bg-secondary-container p-stack-lg rounded-xl border border-secondary/20 custom-shadow flex flex-col justify-between">
+<span class="material-symbols-outlined text-on-secondary-container text-4xl">groups</span>
+<div class="mt-8">
+<h3 class="font-display-lg text-4xl text-on-secondary-container mb-2">15,000+</h3>
+<p class="font-body-md text-on-secondary-container/80 uppercase tracking-wider">Farmers Partnered</p>
+</div>
+</div>
+</div>
+<!-- Product Card Component -->
+<div class="bg-white rounded-xl overflow-hidden custom-shadow border border-outline-variant group">
+<div class="h-64 overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-end studio photograph of premium long-grain Jasmine rice held in a rustic ceramic bowl. The lighting is soft and golden, evocative of a sunrise over a Vietnamese paddy field. The background is a clean, minimalist off-white texture, emphasizing the purity and quality of the grain. The overall aesthetic is professional and corporate, using a palette of greens and warm golds to convey luxury agricultural export quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBY45YiKEOI9uD7cyn3S2LOJ5_KOKsls_bCkZZEL3ATo4iWCvWKBlVN-fGwZISiI1liV7neDAsMT-RQT-aOhqIgTsbyGXtZOZWyeJnr4a2-nVuNtg6xVZd9tkcXnH5z4GjXbqj8AoYsNchE8WJVJQd8HsKfQjxCWtgARdlOWZWxrG81kcPvd0QjyqJdmdPOpjKDG7v-PQxGn5QDEsIqnetWuqf82tHPpeFTKzVMiefT_tbOfRq1KLmhl8MrmX8d766521pXFi9smv4"/>
+<div class="absolute top-4 left-4">
+<span class="bg-primary/90 backdrop-blur-md text-on-primary px-3 py-1 rounded font-label-sm text-label-sm uppercase">Premium Grade</span>
+</div>
+</div>
+<div class="p-stack-lg">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Vietnam Jasmine Rice</h3>
+<p class="font-body-md text-on-surface-variant mb-stack-lg">Naturally fragrant, long-grain rice cultivated in the fertile Mekong Delta region.</p>
+<div class="space-y-3 pt-stack-md border-t border-outline-variant/30">
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-on-surface-variant uppercase">Broken %</span>
+<span class="font-label-md text-primary">5% Max</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-on-surface-variant uppercase">Moisture</span>
+<span class="font-label-md text-primary">14.0% Max</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-on-surface-variant uppercase">Purity</span>
+<span class="font-label-md text-primary">95.0% Min</span>
+</div>
+</div>
+<button class="w-full mt-stack-lg bg-primary text-on-primary py-3 rounded-lg font-label-md text-label-md group-hover:bg-primary/95 transition-all">
+                        Technical Specs
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container border-t border-outline-variant py-stack-lg"><div class="w-full px-margin-mobile md:px-margin-desktop py-stack-lg max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-gutter"><div class="space-y-4"><span class="font-display-lg text-headline-sm text-primary">Vietnam Good Rice</span><p class="text-on-surface-variant text-sm leading-relaxed">A An Joint Stock Company<br/>(Cong ty Co phan Luong thuc A An)<br/>14th Floor, Diamond Flower Tower,<br/>48 Le Van Luong St., N1 New Urban Area,<br/>Yen Hoa Ward, Hanoi, Vietnam</p><p class="text-on-surface-variant text-xs">A member of Tan Long Group</p></div><div class="space-y-4"><h4 class="font-label-md text-primary">Company</h4><ul class="space-y-2 text-sm"><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="about.html">About A An</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="operations.html">Operations &amp; Capacity</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="products.html">Rice Portfolio</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="partners.html">For Volume Partners</a></li></ul></div><div class="space-y-4"><h4 class="font-label-md text-primary">Services</h4><ul class="space-y-2 text-sm"><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="quality.html">Quality &amp; Compliance</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="tenders.html">Government Tenders</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="track.html">Track Your Shipment</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" href="quote.html">Request a Quote</a></li></ul></div><div class="space-y-4"><h4 class="font-label-md text-primary">Export Desk</h4><div class="bg-surface p-4 rounded-xl border border-outline-variant space-y-1"><p class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Contact</p><p class="text-on-surface font-semibold">Mr. Jay</p><p class="text-primary font-bold">+84 396 529 995</p><p class="text-on-surface-variant text-sm">hoadt@aan.vn</p></div></div></div><div class="border-t border-outline-variant mt-12 pt-8 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4"><p class="text-on-surface-variant text-xs">&copy; 2026 Vietnam Good Rice - A An JSC, Tan Long Group. All rights reserved.</p><div class="flex gap-6 text-xs text-on-surface-variant"><span>Built for Global Trade</span><span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">language</span> English (Global)</span></div></div></footer>
+<script>
+        // Micro-interactions and atmospheric effects
+        document.addEventListener('DOMContentLoaded', () => {
+            // Subtle parallax effect on scroll for elements with 'custom-shadow'
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const items = document.querySelectorAll('.custom-shadow');
+                items.forEach((item, index) => {
+                    const speed = 0.05 + (index * 0.01);
+                    const yPos = -(scrolled * speed);
+                    // Just a tiny nudge for life
+                    item.style.transform = `translateY(${yPos * 0.1}px)`;
+                });
+            });
+
+            // Smooth scale interaction for color swatches
+            const swatches = document.querySelectorAll('.h-48');
+            swatches.forEach(swatch => {
+                swatch.addEventListener('mouseenter', () => {
+                    swatch.classList.add('scale-[1.02]');
+                });
+                swatch.addEventListener('mouseleave', () => {
+                    swatch.classList.remove('scale-[1.02]');
+                });
+            });
+        });
+    </script>
+<script>function vgrToggle(id){var e=document.getElementById(id); if(e) e.classList.toggle("hidden");}document.addEventListener("click",function(ev){var d=document.getElementById("lang-menu"), b=document.getElementById("lang-btn");if(d&&b&&!d.classList.contains("hidden")&&!d.contains(ev.target)&&!b.contains(ev.target)){d.classList.add("hidden");}});</script>
+</body></html>
