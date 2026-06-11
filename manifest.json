@@ -1,8 +1,7 @@
 {
   "name": "Vietnam Good Rice",
   "short_name": "VGR",
-  "description": "Premium Vietnamese Rice Export Portal - A An, Tan Long Group",
-  "start_url": "/",
+"description": "Independent Vietnamese rice export portal based in the Mekong Delta area, An Giang Province"  "start_url": "/",
   "display": "standalone",
   "background_color": "#FAF7F0",
   "theme_color": "#14532D",
