@@ -1,1 +1,141 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Request a Quote | Viet Nam Good Rice</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-[#FAF7F0] text-[#1c1c18]"><header class="border-b p-5"><nav class="max-w-6xl mx-auto flex justify-between"><a class="font-bold text-[#14532D]" href="index.html">Viet Nam Good Rice</a><div class="space-x-4 text-sm"><a href="about.html">About</a><a href="products.html">Products</a><a href="operations.html">Operations</a><a href="quality.html">Quality</a><a href="tenders.html">Tenders</a><a href="track.html">Track</a><a href="partners.html">Partners</a></div></nav></header><main><section class="bg-[#14532D] text-white"><div class="max-w-6xl mx-auto px-5 py-20"><p class="uppercase tracking-widest">Contact and request for quotation</p><h1 class="text-4xl font-bold mt-4">Send your rice requirement for a practical export offer.</h1><p class="mt-5 max-w-3xl">The more complete your information is, the faster we can confirm price, lead time, packing and document feasibility.</p></div></section><section class="max-w-6xl mx-auto px-5 py-14 grid md:grid-cols-3 gap-8"><form class="md:col-span-2 bg-white border rounded-xl p-8 space-y-5" action="mailto:sales@vietnamgoodrice.com" method="post" enctype="text/plain"><div class="grid md:grid-cols-2 gap-5"><input class="border rounded-lg p-3" name="company" placeholder="Company name"><input class="border rounded-lg p-3" name="contact" placeholder="Contact person"><input class="border rounded-lg p-3" name="email" placeholder="Email"><input class="border rounded-lg p-3" name="destination" placeholder="Destination port"></div><div class="grid md:grid-cols-2 gap-5"><input class="border rounded-lg p-3" name="rice_type" placeholder="Rice type"><input class="border rounded-lg p-3" name="quantity" placeholder="Quantity"><input class="border rounded-lg p-3" name="packing" placeholder="Packing"><input class="border rounded-lg p-3" name="term" placeholder="FOB / CIF"></div><textarea class="border rounded-lg p-3 w-full" name="requirement" rows="6" placeholder="Specification, crop year, payment term, certificates, delivery timeline..."></textarea><button class="bg-[#14532D] text-white px-8 py-4 rounded-xl font-bold" type="submit">Send RFQ</button><p class="text-sm text-[#59635A]">This form opens your email app. It can be connected to Microsoft Forms, SharePoint, Power Automate or n8n later.</p></form><aside class="bg-white border rounded-xl p-8 h-fit"><h2 class="text-2xl font-bold text-[#14532D]">Export desk</h2><p class="mt-4">Mekong Delta area, An Giang Province, Viet Nam</p><ul class="mt-6 space-y-2 text-sm"><li>Rice type and specification</li><li>Quantity and shipment schedule</li><li>Destination port and trade term</li><li>Packing and label requirement</li><li>Certificates and payment term</li></ul></aside></section></main><footer class="p-5 border-t"><div class="max-w-6xl mx-auto text-sm">© 2026 Viet Nam Good Rice · Mekong Delta area, An Giang Province, Viet Nam</div></footer></body></html>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request a Quote | Viet Nam Good Rice</title>
+  <meta name="description" content="Send your rice requirement to Viet Nam Good Rice for a practical export offer: rice type, quantity, destination, packing, term and certificates." />
+  <meta name="theme-color" content="#0F4C3A" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Noto+Serif:wght@600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script src="assets/tw-config.js"></script>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="idc-header">
+    <nav class="max-w-7xl mx-auto px-5 md:px-10 py-4 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/favicon.svg" alt="Viet Nam Good Rice emblem" class="w-10 h-10" />
+        <span class="leading-tight">
+          <span class="brand-name block">Viet Nam Good Rice</span>
+          <span class="brand-sub block">Mekong Delta Rice Export</span>
+        </span>
+      </a>
+      <div class="hidden lg:flex items-center gap-7">
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="products.html">Products</a>
+        <a class="nav-link" href="operations.html">Operations</a>
+        <a class="nav-link" href="quality.html">Quality</a>
+        <a class="nav-link" href="tenders.html">Tenders</a>
+        <a class="nav-link" href="track.html">Track</a>
+        <a class="nav-link" href="partners.html">Partners</a>
+        <a class="btn btn-gold btn-sm" href="quote.html">Request Quote</a>
+      </div>
+      <button class="lg:hidden p-2 text-primary" aria-label="Open menu" onclick="toggleMenu()"><span class="material-symbols-outlined">menu</span></button>
+    </nav>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-line bg-paper px-5 py-3 space-y-1">
+      <a class="nav-link block py-2" href="about.html">About</a>
+      <a class="nav-link block py-2" href="products.html">Products</a>
+      <a class="nav-link block py-2" href="operations.html">Operations</a>
+      <a class="nav-link block py-2" href="quality.html">Quality</a>
+      <a class="nav-link block py-2" href="tenders.html">Tenders</a>
+      <a class="nav-link block py-2" href="track.html">Track</a>
+      <a class="nav-link block py-2" href="partners.html">Partners</a>
+      <a class="btn btn-gold block mt-2" href="quote.html">Request Quote</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="idc-hero">
+      <div class="tile-bg tile-overlay"></div>
+      <div class="relative max-w-7xl mx-auto px-5 md:px-10 py-20 md:py-24">
+        <p class="eyebrow">Contact &amp; request for quotation</p>
+        <h1 class="font-serif text-4xl md:text-6xl font-extrabold mt-5 max-w-4xl leading-[1.08]">Send your rice requirement for a practical export offer.</h1>
+        <p class="mt-6 text-lg text-green-50/90 max-w-3xl leading-8">The more complete your information is, the faster we can confirm price, lead time, packing and document feasibility.</p>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 md:px-10 py-16 md:py-20 grid lg:grid-cols-3 gap-8">
+      <form class="lg:col-span-2 idc-card framed p-8 space-y-5" action="mailto:sales@vietnamgoodrice.com" method="post" enctype="text/plain">
+        <div class="grid md:grid-cols-2 gap-5">
+          <input class="field" name="company" placeholder="Company name" />
+          <input class="field" name="contact" placeholder="Contact person" />
+          <input class="field" type="email" name="email" placeholder="Email" />
+          <input class="field" name="destination" placeholder="Destination port" />
+        </div>
+        <div class="grid md:grid-cols-2 gap-5">
+          <input class="field" name="rice_type" placeholder="Rice type" />
+          <input class="field" name="quantity" placeholder="Quantity" />
+          <input class="field" name="packing" placeholder="Packing" />
+          <input class="field" name="term" placeholder="FOB / CIF" />
+        </div>
+        <textarea class="field" name="requirement" rows="6" placeholder="Specification, crop year, payment term, certificates, delivery timeline..."></textarea>
+        <button class="btn btn-primary" type="submit">Send RFQ</button>
+        <p class="text-sm text-muted">This form opens your email app. It can be connected to Microsoft Forms, SharePoint, Power Automate or n8n later.</p>
+      </form>
+
+      <aside class="idc-card framed p-8 h-fit">
+        <h2 class="font-serif text-2xl font-bold text-primary">Export desk</h2>
+        <p class="mt-4 text-muted">Mekong Delta area, An Giang Province, Viet Nam</p>
+        <p class="mt-2 text-sm"><a class="text-primary font-semibold" href="mailto:sales@vietnamgoodrice.com">sales@vietnamgoodrice.com</a></p>
+        <div class="rule-gold my-6"><span>Include</span></div>
+        <ul class="space-y-3 text-sm text-muted">
+          <li class="flex gap-3"><span class="material-symbols-outlined text-gold text-xl">check_circle</span>Rice type and specification</li>
+          <li class="flex gap-3"><span class="material-symbols-outlined text-gold text-xl">check_circle</span>Quantity and shipment schedule</li>
+          <li class="flex gap-3"><span class="material-symbols-outlined text-gold text-xl">check_circle</span>Destination port and trade term</li>
+          <li class="flex gap-3"><span class="material-symbols-outlined text-gold text-xl">check_circle</span>Packing and label requirement</li>
+          <li class="flex gap-3"><span class="material-symbols-outlined text-gold text-xl">check_circle</span>Certificates and payment term</li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="idc-footer">
+    <div class="max-w-7xl mx-auto px-5 md:px-10 py-14 grid md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="assets/favicon.svg" alt="" class="w-9 h-9" />
+          <span class="font-serif text-xl font-bold text-white">Viet Nam Good Rice</span>
+        </div>
+        <p class="mt-4 text-sm leading-6 text-[#cfe0d6]">Independent rice export desk based in the Mekong Delta area, An Giang Province, Viet Nam.</p>
+      </div>
+      <div>
+        <h4 class="mb-3">Company</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html">About us</a></li>
+          <li><a href="operations.html">Operations</a></li>
+          <li><a href="partners.html">Volume partners</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="mb-3">Trade Support</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="products.html">Rice portfolio</a></li>
+          <li><a href="quality.html">Quality &amp; documents</a></li>
+          <li><a href="tenders.html">Government tenders</a></li>
+          <li><a href="track.html">Shipment tracking</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="mb-3">Export Desk</h4>
+        <p class="text-sm leading-6 text-[#cfe0d6]">Mekong Delta area, An Giang Province, Viet Nam</p>
+        <p class="text-sm mt-2"><a href="mailto:sales@vietnamgoodrice.com">sales@vietnamgoodrice.com</a></p>
+        <a href="quote.html" class="btn btn-gold btn-sm mt-4">Request Quote</a>
+      </div>
+    </div>
+    <div class="border-t border-white/15">
+      <div class="max-w-7xl mx-auto px-5 md:px-10 py-5 text-xs text-[#9fb6a8] flex flex-col md:flex-row justify-between gap-2">
+        <span>© 2026 Viet Nam Good Rice. All rights reserved.</span>
+        <span>Mekong Delta area, An Giang Province, Viet Nam.</span>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/site.js"></script>
+</body>
+</html>
