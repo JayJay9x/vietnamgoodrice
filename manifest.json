@@ -1,10 +1,11 @@
 {
-  "name": "Vietnam Good Rice",
+  "name": "Viet Nam Good Rice",
   "short_name": "VGR",
-"description": "Independent Vietnamese rice export portal based in the Mekong Delta area, An Giang Province"  "start_url": "/",
+  "description": "Independent Vietnamese rice export desk based in the Mekong Delta area, An Giang Province.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAF7F0",
-  "theme_color": "#14532D",
+  "background_color": "#F5EFE0",
+  "theme_color": "#0F4C3A",
   "icons": [
     { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
