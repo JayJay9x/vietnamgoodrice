@@ -4,75 +4,179 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reliable Vietnamese Rice Exporter | Viet Nam Good Rice</title>
-  <meta name="description" content="Independent Vietnamese rice export desk based in the Mekong Delta area, An Giang Province." />
-  <meta name="theme-color" content="#14532D" />
+  <meta name="description" content="Independent Vietnamese rice export desk based in the Mekong Delta area, An Giang Province. Sourcing, export documentation, quality coordination and shipment follow-up." />
+  <meta name="theme-color" content="#0F4C3A" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:wght@600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = { theme: { extend: { colors: { primary: "#14532D", secondary: "#9A6A00", cream: "#FAF7F0", surface: "#FFFFFF", soft: "#EEF5EA", line: "#D8DDD2", text: "#1c1c18", muted: "#59635A" }, fontFamily: { sans: ["Inter", "sans-serif"], serif: ["Noto Serif", "serif"] } } } }
-  </script>
-  <style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    .hero-pattern { background: radial-gradient(circle at 15% 15%, rgba(255, 210, 117, .35), transparent 28%), radial-gradient(circle at 85% 10%, rgba(150, 213, 163, .32), transparent 26%), linear-gradient(135deg, #103d24 0%, #14532D 48%, #0d2f1c 100%); }
-    .card { border: 1px solid #D8DDD2; background: #fff; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(20,83,45,.06); }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Noto+Serif:wght@600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script src="assets/tw-config.js"></script>
+  <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body class="bg-cream text-text font-sans">
-  <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-line">
+<body>
+  <!-- HEADER -->
+  <header class="idc-header">
     <nav class="max-w-7xl mx-auto px-5 md:px-10 py-4 flex items-center justify-between">
-      <a href="index.html" class="leading-tight">
-        <div class="font-serif text-xl font-bold text-primary">Viet Nam Good Rice</div>
-        <div class="text-[11px] uppercase tracking-[0.22em] text-muted">Mekong Delta Rice Export</div>
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="assets/favicon.svg" alt="Viet Nam Good Rice emblem" class="w-10 h-10" />
+        <span class="leading-tight">
+          <span class="brand-name block">Viet Nam Good Rice</span>
+          <span class="brand-sub block">Mekong Delta Rice Export</span>
+        </span>
       </a>
-      <div class="hidden lg:flex items-center gap-6 text-sm font-semibold text-muted">
-        <a class="hover:text-primary" href="about.html">About</a>
-        <a class="hover:text-primary" href="products.html">Products</a>
-        <a class="hover:text-primary" href="operations.html">Operations</a>
-        <a class="hover:text-primary" href="quality.html">Quality</a>
-        <a class="hover:text-primary" href="tenders.html">Tenders</a>
-        <a class="hover:text-primary" href="track.html">Track</a>
-        <a class="hover:text-primary" href="partners.html">Partners</a>
-        <a class="bg-secondary text-white px-5 py-2.5 rounded-lg hover:opacity-90" href="quote.html">Request Quote</a>
+      <div class="hidden lg:flex items-center gap-7">
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="products.html">Products</a>
+        <a class="nav-link" href="operations.html">Operations</a>
+        <a class="nav-link" href="quality.html">Quality</a>
+        <a class="nav-link" href="tenders.html">Tenders</a>
+        <a class="nav-link" href="track.html">Track</a>
+        <a class="nav-link" href="partners.html">Partners</a>
+        <a class="btn btn-gold btn-sm" href="quote.html">Request Quote</a>
       </div>
-      <button class="lg:hidden p-2 text-primary" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"><span class="material-symbols-outlined">menu</span></button>
+      <button class="lg:hidden p-2 text-primary" aria-label="Open menu" onclick="toggleMenu()"><span class="material-symbols-outlined">menu</span></button>
     </nav>
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-line px-5 py-4 space-y-3 bg-cream">
-      <a class="block" href="about.html">About</a><a class="block" href="products.html">Products</a><a class="block" href="operations.html">Operations</a><a class="block" href="quality.html">Quality</a><a class="block" href="tenders.html">Tenders</a><a class="block" href="track.html">Track</a><a class="block" href="partners.html">Partners</a><a class="block text-center bg-secondary text-white py-3 rounded-lg font-semibold" href="quote.html">Request Quote</a>
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-line bg-paper px-5 py-3 space-y-1">
+      <a class="nav-link block py-2" href="about.html">About</a>
+      <a class="nav-link block py-2" href="products.html">Products</a>
+      <a class="nav-link block py-2" href="operations.html">Operations</a>
+      <a class="nav-link block py-2" href="quality.html">Quality</a>
+      <a class="nav-link block py-2" href="tenders.html">Tenders</a>
+      <a class="nav-link block py-2" href="track.html">Track</a>
+      <a class="nav-link block py-2" href="partners.html">Partners</a>
+      <a class="btn btn-gold block mt-2" href="quote.html">Request Quote</a>
     </div>
   </header>
+
   <main>
-    <section class="hero-pattern text-white">
-      <div class="max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32 grid lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <p class="uppercase tracking-[0.25em] text-sm text-yellow-100 font-semibold">Mekong Delta rice export desk</p>
-          <h1 class="mt-5 font-serif text-4xl md:text-6xl font-bold leading-tight">Reliable Vietnamese rice supply from the Mekong Delta.</h1>
-          <p class="mt-6 text-lg text-green-50 leading-8">We connect international buyers with practical rice sourcing, export documentation, quality coordination and shipment follow-up from one of Viet Nam's most abundant rice-producing regions.</p>
-          <div class="mt-8 flex flex-col sm:flex-row gap-4"><a href="quote.html" class="bg-secondary text-white px-7 py-4 rounded-xl font-bold text-center">Request a Quote</a><a href="track.html" class="border border-white/40 px-7 py-4 rounded-xl font-bold text-center hover:bg-white/10">Track Shipment</a></div>
+    <!-- HERO -->
+    <section class="idc-hero">
+      <div class="tile-bg tile-overlay"></div>
+      <div class="relative max-w-7xl mx-auto px-5 md:px-10 py-24 md:py-32 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <p class="eyebrow">Mekong Delta rice export desk</p>
+          <h1 class="mt-5 font-serif text-4xl md:text-6xl font-extrabold leading-[1.08]">Reliable Vietnamese rice supply from the Mekong Delta.</h1>
+          <p class="mt-6 text-lg text-green-50/90 leading-8 max-w-xl">We connect international buyers with practical rice sourcing, export documentation, quality coordination and shipment follow-up from one of Viet Nam's most abundant rice-producing regions.</p>
+          <div class="mt-9 flex flex-col sm:flex-row gap-4">
+            <a href="quote.html" class="btn btn-gold">Request a Quote</a>
+            <a href="track.html" class="btn btn-ghost">Track Shipment</a>
+          </div>
         </div>
-        <div class="bg-white/10 border border-white/20 rounded-3xl p-8 backdrop-blur">
-          <div class="grid grid-cols-2 gap-4">
-            <div class="rounded-2xl bg-white/15 p-5"><div class="text-3xl font-bold">FOB/CIF</div><p class="text-sm text-green-50 mt-2">Flexible trade terms</p></div>
-            <div class="rounded-2xl bg-white/15 p-5"><div class="text-3xl font-bold">Bulk/Retail</div><p class="text-sm text-green-50 mt-2">Multiple packing formats</p></div>
-            <div class="rounded-2xl bg-white/15 p-5"><div class="text-3xl font-bold">QA Docs</div><p class="text-sm text-green-50 mt-2">Inspection and export files</p></div>
-            <div class="rounded-2xl bg-white/15 p-5"><div class="text-3xl font-bold">Live Follow-up</div><p class="text-sm text-green-50 mt-2">Order and shipment visibility</p></div>
+        <div class="reveal glass p-8 backdrop-blur relative">
+          <div class="absolute inset-3 border border-gold/40 rounded-xl pointer-events-none"></div>
+          <div class="relative grid grid-cols-2 gap-4">
+            <div class="rounded-xl bg-white/10 p-5"><div class="font-serif text-2xl font-bold text-gold-l">FOB / CIF</div><p class="text-sm text-green-50/80 mt-2">Flexible trade terms</p></div>
+            <div class="rounded-xl bg-white/10 p-5"><div class="font-serif text-2xl font-bold text-gold-l">Bulk / Retail</div><p class="text-sm text-green-50/80 mt-2">Multiple packing formats</p></div>
+            <div class="rounded-xl bg-white/10 p-5"><div class="font-serif text-2xl font-bold text-gold-l">QA Docs</div><p class="text-sm text-green-50/80 mt-2">Inspection &amp; export files</p></div>
+            <div class="rounded-xl bg-white/10 p-5"><div class="font-serif text-2xl font-bold text-gold-l">Follow-up</div><p class="text-sm text-green-50/80 mt-2">Order &amp; shipment visibility</p></div>
           </div>
         </div>
       </div>
     </section>
-    <section class="max-w-7xl mx-auto px-5 md:px-10 py-18 md:py-24">
-      <div class="text-center max-w-3xl mx-auto"><h2 class="font-serif text-3xl md:text-4xl font-bold text-primary">Why buyers work with Viet Nam Good Rice</h2><p class="mt-4 text-muted leading-7">The focus is simple: clear specification, controlled execution, timely documentation and practical communication until cargo is delivered.</p></div>
+
+    <!-- WHY -->
+    <section class="max-w-7xl mx-auto px-5 md:px-10 py-20 md:py-24">
+      <div class="text-center max-w-3xl mx-auto reveal">
+        <div class="rule-gold justify-center mb-5"><span>Why buyers choose us</span></div>
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-primary">Why buyers work with Viet Nam Good Rice</h2>
+        <p class="mt-4 text-muted leading-7">The focus is simple: clear specification, controlled execution, timely documentation and practical communication until cargo is delivered.</p>
+      </div>
       <div class="mt-12 grid md:grid-cols-3 gap-6">
-        <div class="card p-7"><span class="material-symbols-outlined text-primary text-4xl">verified</span><h3 class="mt-4 font-bold text-xl">Specification first</h3><p class="mt-3 text-muted leading-7">Rice type, broken rate, moisture, crop, packing and inspection requirements are aligned before order confirmation.</p></div>
-        <div class="card p-7"><span class="material-symbols-outlined text-primary text-4xl">route</span><h3 class="mt-4 font-bold text-xl">Export execution</h3><p class="mt-3 text-muted leading-7">Shipment planning covers production readiness, booking, container loading, customs, phytosanitary and banking documents.</p></div>
-        <div class="card p-7"><span class="material-symbols-outlined text-primary text-4xl">support_agent</span><h3 class="mt-4 font-bold text-xl">Responsive trade desk</h3><p class="mt-3 text-muted leading-7">Buyers receive clear updates, risk alerts and practical options instead of vague promises.</p></div>
+        <div class="idc-card framed p-8 reveal"><span class="material-symbols-outlined text-gold text-4xl">verified</span><h3 class="mt-4 font-serif font-bold text-xl text-primary">Specification first</h3><p class="mt-3 text-muted leading-7">Rice type, broken rate, moisture, crop, packing and inspection requirements are aligned before order confirmation.</p></div>
+        <div class="idc-card framed p-8 reveal"><span class="material-symbols-outlined text-gold text-4xl">route</span><h3 class="mt-4 font-serif font-bold text-xl text-primary">Export execution</h3><p class="mt-3 text-muted leading-7">Shipment planning covers production readiness, booking, container loading, customs, phytosanitary and banking documents.</p></div>
+        <div class="idc-card framed p-8 reveal"><span class="material-symbols-outlined text-gold text-4xl">support_agent</span><h3 class="mt-4 font-serif font-bold text-xl text-primary">Responsive trade desk</h3><p class="mt-3 text-muted leading-7">Buyers receive clear updates, risk alerts and practical options instead of vague promises.</p></div>
       </div>
     </section>
-    <section class="bg-soft border-y border-line"><div class="max-w-7xl mx-auto px-5 md:px-10 py-16 grid lg:grid-cols-5 gap-6 text-center"><div><div class="text-3xl font-bold text-primary">Jasmine</div><p class="text-sm text-muted mt-2">Aromatic rice</p></div><div><div class="text-3xl font-bold text-primary">Fragrant</div><p class="text-sm text-muted mt-2">Daily consumption</p></div><div><div class="text-3xl font-bold text-primary">Japonica</div><p class="text-sm text-muted mt-2">Short grain</p></div><div><div class="text-3xl font-bold text-primary">White Rice</div><p class="text-sm text-muted mt-2">5% to 25% broken</p></div><div><div class="text-3xl font-bold text-primary">Glutinous</div><p class="text-sm text-muted mt-2">Sticky rice</p></div></div></section>
-    <section class="max-w-7xl mx-auto px-5 md:px-10 py-20 grid lg:grid-cols-2 gap-10 items-center"><div><h2 class="font-serif text-3xl font-bold text-primary">Built for repeat importers and volume buyers</h2><p class="mt-4 text-muted leading-7">For recurring demand, we can standardize product codes, packing instructions, document checklist and shipment milestones so every order is easier to control.</p></div><div class="card p-8"><ol class="space-y-5"><li class="flex gap-4"><span class="font-bold text-secondary">01</span><span>Confirm specification, target price and destination requirements.</span></li><li class="flex gap-4"><span class="font-bold text-secondary">02</span><span>Lock packing, production lead time and shipment window.</span></li><li class="flex gap-4"><span class="font-bold text-secondary">03</span><span>Control inspection, loading, documents and payment milestones.</span></li></ol></div></section>
+
+    <!-- RICE STRIP -->
+    <section class="bg-primary text-white relative overflow-hidden">
+      <div class="tile-bg absolute inset-0 opacity-10"></div>
+      <div class="relative max-w-7xl mx-auto px-5 md:px-10 py-16">
+        <div class="rule-gold justify-center mb-8"><span>Rice portfolio</span></div>
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-6 text-center">
+          <div><div class="font-serif text-2xl font-bold text-gold-l">Jasmine</div><p class="text-sm text-green-50/80 mt-2">Aromatic rice</p></div>
+          <div><div class="font-serif text-2xl font-bold text-gold-l">Fragrant</div><p class="text-sm text-green-50/80 mt-2">Daily consumption</p></div>
+          <div><div class="font-serif text-2xl font-bold text-gold-l">Japonica</div><p class="text-sm text-green-50/80 mt-2">Short grain</p></div>
+          <div><div class="font-serif text-2xl font-bold text-gold-l">White Rice</div><p class="text-sm text-green-50/80 mt-2">5% to 25% broken</p></div>
+          <div><div class="font-serif text-2xl font-bold text-gold-l">Glutinous</div><p class="text-sm text-green-50/80 mt-2">Sticky rice</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPEAT BUYERS -->
+    <section class="max-w-7xl mx-auto px-5 md:px-10 py-20 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal">
+        <div class="rule-gold mb-5"><span>For volume buyers</span></div>
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-primary">Built for repeat importers and volume buyers</h2>
+        <p class="mt-4 text-muted leading-7">For recurring demand, we can standardize product codes, packing instructions, document checklists and shipment milestones so every order is easier to control.</p>
+        <a href="partners.html" class="btn btn-outline mt-7">Explore volume partnership</a>
+      </div>
+      <div class="idc-card framed p-9 reveal">
+        <ol class="space-y-6">
+          <li class="flex gap-5"><span class="num">01</span><span class="text-text/90 leading-7">Confirm specification, target price and destination requirements.</span></li>
+          <li class="flex gap-5"><span class="num">02</span><span class="text-text/90 leading-7">Lock packing, production lead time and shipment window.</span></li>
+          <li class="flex gap-5"><span class="num">03</span><span class="text-text/90 leading-7">Control inspection, loading, documents and payment milestones.</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-soft border-y border-line">
+      <div class="max-w-7xl mx-auto px-5 md:px-10 py-16 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div>
+          <h2 class="font-serif text-2xl md:text-3xl font-bold text-primary">Have a rice requirement in mind?</h2>
+          <p class="mt-3 text-muted">Send rice type, quantity, destination port and trade term — we reply with a practical offer.</p>
+        </div>
+        <a href="quote.html" class="btn btn-primary shrink-0">Request a Quote</a>
+      </div>
+    </section>
   </main>
-  <footer class="border-t border-line bg-white"><div class="max-w-7xl mx-auto px-5 md:px-10 py-12 grid md:grid-cols-4 gap-8"><div class="md:col-span-1"><div class="font-serif text-2xl font-bold text-primary">Viet Nam Good Rice</div><p class="mt-3 text-sm text-muted leading-6">Independent rice export desk based in the Mekong Delta area, An Giang Province, Viet Nam.</p></div><div><h4 class="font-bold text-primary mb-3">Company</h4><ul class="space-y-2 text-sm text-muted"><li><a href="about.html" class="hover:text-primary">About us</a></li><li><a href="operations.html" class="hover:text-primary">Operations</a></li><li><a href="partners.html" class="hover:text-primary">Volume partners</a></li></ul></div><div><h4 class="font-bold text-primary mb-3">Trade Support</h4><ul class="space-y-2 text-sm text-muted"><li><a href="products.html" class="hover:text-primary">Rice portfolio</a></li><li><a href="quality.html" class="hover:text-primary">Quality & documents</a></li><li><a href="tenders.html" class="hover:text-primary">Government tenders</a></li><li><a href="track.html" class="hover:text-primary">Shipment tracking</a></li></ul></div><div><h4 class="font-bold text-primary mb-3">Export Desk</h4><div class="rounded-xl border border-line bg-cream p-4 text-sm text-muted leading-6"><p class="font-semibold text-text">Mekong Delta area, An Giang Province</p><p>Viet Nam</p><p class="mt-2">Use the quote form for product, packing, shipment and tender requests.</p></div></div></div><div class="border-t border-line"><div class="max-w-7xl mx-auto px-5 md:px-10 py-5 text-xs text-muted flex flex-col md:flex-row justify-between gap-3"><span>© 2026 Viet Nam Good Rice. All rights reserved.</span><span>Built for practical rice sourcing, export execution and shipment visibility.</span></div></div></footer>
+
+  <!-- FOOTER -->
+  <footer class="idc-footer">
+    <div class="max-w-7xl mx-auto px-5 md:px-10 py-14 grid md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center gap-3">
+          <img src="assets/favicon.svg" alt="" class="w-9 h-9" />
+          <span class="font-serif text-xl font-bold text-white">Viet Nam Good Rice</span>
+        </div>
+        <p class="mt-4 text-sm leading-6 text-[#cfe0d6]">Independent rice export desk based in the Mekong Delta area, An Giang Province, Viet Nam.</p>
+      </div>
+      <div>
+        <h4 class="mb-3">Company</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="about.html">About us</a></li>
+          <li><a href="operations.html">Operations</a></li>
+          <li><a href="partners.html">Volume partners</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="mb-3">Trade Support</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="products.html">Rice portfolio</a></li>
+          <li><a href="quality.html">Quality &amp; documents</a></li>
+          <li><a href="tenders.html">Government tenders</a></li>
+          <li><a href="track.html">Shipment tracking</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="mb-3">Export Desk</h4>
+        <p class="text-sm leading-6 text-[#cfe0d6]">Mekong Delta area, An Giang Province, Viet Nam</p>
+        <p class="text-sm mt-2"><a href="mailto:sales@vietnamgoodrice.com">sales@vietnamgoodrice.com</a></p>
+        <a href="quote.html" class="btn btn-gold btn-sm mt-4">Request Quote</a>
+      </div>
+    </div>
+    <div class="border-t border-white/15">
+      <div class="max-w-7xl mx-auto px-5 md:px-10 py-5 text-xs text-[#9fb6a8] flex flex-col md:flex-row justify-between gap-2">
+        <span>© 2026 Viet Nam Good Rice. All rights reserved.</span>
+        <span>Built for practical rice sourcing, export execution and shipment visibility.</span>
+      </div>
+    </div>
+  </footer>
+  <script src="assets/site.js"></script>
 </body>
 </html>

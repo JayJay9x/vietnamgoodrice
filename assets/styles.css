@@ -41,6 +41,11 @@ h1,h2,h3,.font-serif{font-family:"Playfair Display","Noto Serif",serif}
 .nav-link::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;
   background:var(--gold);transition:width .25s}
 .nav-link:hover::after{width:100%}
+.nav-link.active{color:var(--primary)}
+.nav-link.active::after{width:100%}
+
+/* Material Symbols (font-face comes from Google Fonts link) */
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
 
 /* ---- Buttons ---- */
 .btn{display:inline-block;font-weight:700;border-radius:.7rem;padding:.85rem 1.6rem;
@@ -54,6 +59,7 @@ h1,h2,h3,.font-serif{font-family:"Playfair Display","Noto Serif",serif}
 .btn-ghost:hover{background:rgba(255,255,255,.12)}
 .btn-outline{border:1.5px solid var(--primary);color:var(--primary)}
 .btn-outline:hover{background:var(--primary);color:#fff}
+.btn-sm{padding:.6rem 1.15rem;font-size:.875rem}
 
 /* ---- Hero ---- */
 .idc-hero{position:relative;color:#fff;overflow:hidden;

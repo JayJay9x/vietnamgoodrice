@@ -6,6 +6,15 @@
     if (m) m.classList.toggle("hidden");
   };
 
+  // Mark current nav link active
+  document.addEventListener("DOMContentLoaded", function () {
+    var here = location.pathname.split("/").pop() || "index.html";
+    document.querySelectorAll(".nav-link").forEach(function (a) {
+      var href = (a.getAttribute("href") || "").split("/").pop();
+      if (href && href === here) a.classList.add("active");
+    });
+  });
+
   // Reveal-on-scroll
   document.addEventListener("DOMContentLoaded", function () {
     var els = document.querySelectorAll(".reveal");
