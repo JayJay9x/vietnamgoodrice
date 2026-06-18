@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Cánh đồng lúa đồng bằng sông Cửu Long lúc hoàng hôn">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c4d3b"/>
+      <stop offset="38%" stop-color="#3f6b4a"/>
+      <stop offset="62%" stop-color="#b9863a"/>
+      <stop offset="100%" stop-color="#e8b65a"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff3d4"/>
+      <stop offset="40%" stop-color="#f4d27a"/>
+      <stop offset="100%" stop-color="#e8b65a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c79a3e"/>
+      <stop offset="100%" stop-color="#0f4c3a"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f1cf83"/>
+      <stop offset="100%" stop-color="#9e7b3a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sky + sun -->
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <circle cx="1080" cy="430" r="320" fill="url(#sun)"/>
+  <circle cx="1080" cy="430" r="92" fill="#fff6df" opacity="0.95"/>
+
+  <!-- distant tree line / coconut palms silhouette -->
+  <g fill="#123c2e" opacity="0.85">
+    <path d="M0 470 Q 220 430 460 462 T 900 452 T 1340 470 T 1600 458 L1600 540 L0 540 Z"/>
+  </g>
+  <g fill="#0f3527" opacity="0.9">
+    <path d="M150 470c-6-26-2-44 6-44s12 18 6 44z"/>
+    <path d="M150 470c-22-14-32-30-28-38s22-2 28 12c4-16 22-22 30-14s-6 26-30 40z"/>
+    <path d="M1280 466c-6-24-2-40 6-40s12 16 6 40z"/>
+    <path d="M1280 466c-20-12-30-28-26-36s20-2 26 12c4-14 20-20 28-12s-6 24-28 36z"/>
+  </g>
+
+  <!-- water / flooded paddy reflecting the sun -->
+  <rect y="500" width="1600" height="120" fill="url(#water)"/>
+  <g fill="#fff6df" opacity="0.55">
+    <rect x="980" y="520" width="200" height="6" rx="3"/>
+    <rect x="1010" y="542" width="150" height="5" rx="2.5"/>
+    <rect x="1030" y="562" width="110" height="4" rx="2"/>
+    <rect x="1000" y="584" width="170" height="4" rx="2"/>
+  </g>
+
+  <!-- rice field -->
+  <rect y="600" width="1600" height="300" fill="url(#field)"/>
+  <!-- paddy rows perspective -->
+  <g stroke="#0c3d2e" stroke-width="2" opacity="0.5">
+    <path d="M0 640 Q800 624 1600 640"/>
+    <path d="M0 680 Q800 660 1600 680"/>
+    <path d="M0 730 Q800 706 1600 730"/>
+    <path d="M0 790 Q800 762 1600 790"/>
+    <path d="M0 860 Q800 828 1600 860"/>
+  </g>
+
+  <!-- foreground rice stalks -->
+  <g stroke="#1d6b4e" stroke-width="3" fill="none" opacity="0.9">
+    <path d="M60 900 C 60 800 70 760 50 720"/>
+    <path d="M120 900 C 120 790 132 752 150 716"/>
+    <path d="M1500 900 C 1500 800 1488 760 1510 720"/>
+    <path d="M1440 900 C 1440 792 1452 754 1432 716"/>
+  </g>
+  <g fill="#d8b24a">
+    <ellipse cx="50" cy="716" rx="6" ry="16" transform="rotate(-18 50 716)"/>
+    <ellipse cx="150" cy="712" rx="6" ry="16" transform="rotate(16 150 712)"/>
+    <ellipse cx="1510" cy="716" rx="6" ry="16" transform="rotate(18 1510 716)"/>
+    <ellipse cx="1432" cy="712" rx="6" ry="16" transform="rotate(-16 1432 712)"/>
+  </g>
+
+  <!-- farmer with nón lá silhouette -->
+  <g fill="#0a2a20" transform="translate(720 560)">
+    <path d="M0 18 q22 -22 44 0 q-6 -6 -22 -6 q-16 0 -22 6z"/>
+    <circle cx="22" cy="26" r="9"/>
+    <path d="M13 34 q9 -6 18 0 l6 46 q-15 8 -30 0z"/>
+  </g>
+</svg>
