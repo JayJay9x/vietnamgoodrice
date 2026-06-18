@@ -70,6 +70,27 @@ h1,h2,h3,.font-serif{font-family:"Playfair Display","Noto Serif",serif}
 .idc-hero .tile-overlay{position:absolute;inset:0;opacity:.10;pointer-events:none}
 .eyebrow{text-transform:uppercase;letter-spacing:.28em;font-size:.78rem;font-weight:700;color:var(--gold-l)}
 
+/* cinematic photo hero (Ken Burns + jade veil for legibility) */
+.idc-hero--photo .hero-photo{position:absolute;inset:0;background-size:cover;background-position:center 62%;
+  transform:scale(1.06);animation:kenburns 28s ease-in-out infinite alternate;will-change:transform}
+.idc-hero--photo .hero-veil{position:absolute;inset:0;
+  background:linear-gradient(110deg,rgba(8,46,34,.92) 0%,rgba(10,54,41,.74) 42%,rgba(10,54,41,.34) 78%,rgba(10,54,41,.12) 100%)}
+.idc-hero--photo .hero-veil::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(8,46,34,.55),transparent 32%)}
+@keyframes kenburns{from{transform:scale(1.06) translate3d(0,0,0)}to{transform:scale(1.14) translate3d(-1.5%,-1.5%,0)}}
+@media (prefers-reduced-motion:reduce){.idc-hero--photo .hero-photo{animation:none;transform:scale(1.02)}}
+
+/* full-bleed image band (story / emotional break in the page rhythm) */
+.image-band{position:relative;overflow:hidden;color:#fff}
+.image-band .band-photo{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04)}
+.image-band .band-veil{position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(8,46,34,.9) 0%,rgba(10,54,41,.62) 55%,rgba(162,78,54,.32) 100%)}
+
+/* "from the field to your port" journey steps */
+.journey-step{position:relative;padding-left:1.25rem}
+.journey-step::before{content:"";position:absolute;left:0;top:.55rem;width:.55rem;height:.55rem;border-radius:9999px;
+  background:var(--gold-l);box-shadow:0 0 0 4px rgba(224,184,96,.22)}
+
 /* ---- Cards ---- */
 .idc-card{position:relative;background:var(--paper);border:1px solid var(--line);
   border-radius:1.1rem;box-shadow:0 12px 30px rgba(42,32,23,.06);transition:transform .2s,box-shadow .2s}

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Cánh đồng lúa chín vàng vào mùa gặt">
+  <defs>
+    <linearGradient id="bsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f4c3a"/>
+      <stop offset="100%" stop-color="#5c7d4e"/>
+    </linearGradient>
+    <linearGradient id="bfield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e3bd5a"/>
+      <stop offset="55%" stop-color="#c8962f"/>
+      <stop offset="100%" stop-color="#8a6321"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="520" fill="url(#bsky)"/>
+  <!-- haze + low sun -->
+  <ellipse cx="300" cy="150" rx="380" ry="120" fill="#cfe0d6" opacity="0.18"/>
+  <circle cx="300" cy="160" r="60" fill="#f3e2ad" opacity="0.6"/>
+  <!-- distant palms -->
+  <path d="M0 230 Q400 205 800 222 T1600 226 L1600 270 L0 270 Z" fill="#123c2e" opacity="0.85"/>
+  <!-- golden paddy -->
+  <rect y="240" width="1600" height="280" fill="url(#bfield)"/>
+  <!-- rows -->
+  <g stroke="#7d5a1c" stroke-width="2" opacity="0.4">
+    <path d="M0 300 Q800 282 1600 300"/>
+    <path d="M0 350 Q800 326 1600 350"/>
+    <path d="M0 410 Q800 380 1600 410"/>
+    <path d="M0 480 Q800 444 1600 480"/>
+  </g>
+  <!-- scattered rice ears -->
+  <g fill="#fbe9b0" opacity="0.85">
+    <ellipse cx="180" cy="300" rx="4" ry="12" transform="rotate(-20 180 300)"/>
+    <ellipse cx="520" cy="320" rx="4" ry="12" transform="rotate(14 520 320)"/>
+    <ellipse cx="900" cy="305" rx="4" ry="12" transform="rotate(-12 900 305)"/>
+    <ellipse cx="1240" cy="322" rx="4" ry="12" transform="rotate(18 1240 322)"/>
+    <ellipse cx="1420" cy="300" rx="4" ry="12" transform="rotate(-16 1420 300)"/>
+  </g>
+</svg>
