@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Rice Prices — Market Terminal | Viet Nam Good Rice</title>
+<meta name="description" content="Live reference export prices for 5% white rice by origin (Vietnam, Thailand, India, Pakistan and more) in USD/tonne FOB, with the Thailand–Vietnam spread. Source: Osiriz / InfoArroz.">
+<meta name="theme-color" content="#04080a">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --ink:#04080a; --glass:rgba(8,18,12,.62); --glass2:rgba(10,22,15,.55); --line:rgba(67,182,73,.28);
+  --rice:#d7ecd9; --muted:#6f9b7d; --faint:#46624f;
+  --vn:#43b649; --vn-bright:#5dff66; --vn-soft:rgba(67,182,73,.16);
+  --cy:#23e6c8; --th:#ffb838; --in:#ff6a3d; --pk:#2fd4ff; --mm:#b07cff; --th2:#25e8c0; --us:#9fb0bd; --inp:#ffae6b;
+  --up:#43b649; --down:#ff4d6a;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Consolas,monospace;
+  --body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ink);color:var(--rice);font-family:var(--body);-webkit-font-smoothing:antialiased;line-height:1.45;overflow-x:hidden}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-2;display:block}
+body::after{/* global scanline + vignette overlay */
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.18) 2px 3px),
+    radial-gradient(circle at 50% 40%,transparent 40%,rgba(0,0,0,.55) 100%);
+  mix-blend-mode:multiply}
+
+/* de-rez entrance */
+@keyframes derez{
+  0%{opacity:0;clip-path:inset(0 0 100% 0);filter:brightness(2.6) blur(1px);transform:translateY(6px)}
+  9%{opacity:.65;clip-path:inset(0 0 46% 0)} 12%{opacity:.18}
+  19%{opacity:1;clip-path:inset(0 0 0 0);filter:brightness(1.7)} 22%{opacity:.55}
+  31%{opacity:1;filter:none;transform:none} 100%{opacity:1;filter:none;transform:none}}
+.rez{animation:derez .62s steps(28,end) both}
+@keyframes blink{50%{opacity:.25}}
+@keyframes flickline{0%,97%,100%{opacity:.55}98%{opacity:.15}99%{opacity:.8}}
+
+.topnav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:10px 20px;background:rgba(4,8,10,.78);backdrop-filter:blur(9px);border-bottom:1px solid var(--line)}
+.topnav .brand{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--rice);text-decoration:none;font-weight:700}
+.topnav .logo{width:9px;height:18px;border-radius:2px;background:var(--vn);box-shadow:0 0 14px var(--vn),0 0 4px var(--vn-bright)}
+.topnav .links{display:flex;gap:6px}
+.topnav .links a{font-family:var(--mono);font-size:11.5px;color:var(--muted);text-decoration:none;padding:6px 12px;
+  border-radius:7px;border:1px solid transparent;transition:.15s;text-transform:uppercase;letter-spacing:.08em}
+.topnav .links a:hover{color:var(--vn-bright);text-shadow:0 0 8px rgba(93,255,102,.7)}
+.topnav .links a.active{color:var(--vn);border-color:var(--line);background:var(--vn-soft);box-shadow:0 0 12px rgba(67,182,73,.25) inset}
+
+.statusbar{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:8px 22px;border-bottom:1px solid rgba(67,182,73,.12)}
+.statusbar .ok{color:var(--vn)} .statusbar .dot{width:7px;height:7px;border-radius:50%;background:var(--vn);
+  display:inline-block;margin-right:6px;box-shadow:0 0 8px var(--vn);animation:blink 1.6s infinite}
+.statusbar .cy{color:var(--cy)}
+
+.wrap{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
+
+.mast{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:1px solid var(--line);
+  padding-bottom:18px;flex-wrap:wrap}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--vn);margin:0 0 10px;
+  text-shadow:0 0 10px rgba(67,182,73,.5)}
+h1{font-family:var(--mono);font-weight:700;font-size:clamp(25px,4.4vw,42px);line-height:1.0;margin:0;letter-spacing:.01em;text-transform:uppercase}
+h1 em{font-style:normal;color:var(--vn-bright);text-shadow:0 0 16px rgba(93,255,102,.6)}
+.sub{color:var(--muted);font-size:13px;margin:11px 0 0;max-width:50ch}
+.mast-meta{text-align:right;font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.95;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em}
+.mast-meta b{color:var(--rice);font-weight:600} .mast-meta .g{color:var(--vn);text-shadow:0 0 8px rgba(67,182,73,.5)}
+
+/* HUD panel chrome */
+.panel,.kpi{position:relative;background:var(--glass);backdrop-filter:blur(7px);border:1px solid var(--line)}
+.panel{border-radius:4px;padding:19px 20px 8px;margin-bottom:22px;box-shadow:0 0 22px rgba(67,182,73,.08),inset 0 0 30px rgba(67,182,73,.03)}
+.panel::before,.panel::after,.panel .br::before,.panel .br::after{content:'';position:absolute;width:13px;height:13px;border-color:var(--vn);border-style:solid;filter:drop-shadow(0 0 4px rgba(67,182,73,.7))}
+.panel::before{top:-1px;left:-1px;border-width:2px 0 0 2px}
+.panel::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0}
+.panel .br::before{top:-1px;right:-1px;border-width:2px 2px 0 0;position:absolute;content:'';width:13px;height:13px;border-color:var(--vn);border-style:solid}
+.panel .br::after{bottom:-1px;left:-1px;border-width:0 0 2px 2px;position:absolute;content:'';width:13px;height:13px;border-color:var(--vn);border-style:solid}
+
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 0 8px}
+.kpi{border-radius:4px;padding:14px 15px 12px;box-shadow:0 0 14px rgba(67,182,73,.06)}
+.kpi::before{content:'';position:absolute;top:-1px;left:-1px;width:11px;height:11px;border:2px solid var(--vn);border-right:none;border-bottom:none;filter:drop-shadow(0 0 3px rgba(67,182,73,.7))}
+.kpi::after{content:'';position:absolute;bottom:-1px;right:-1px;width:11px;height:11px;border:2px solid var(--vn);border-left:none;border-top:none;filter:drop-shadow(0 0 3px rgba(67,182,73,.7))}
+.kpi.hero{background:linear-gradient(180deg,rgba(67,182,73,.18),var(--glass));border-color:rgba(67,182,73,.5);box-shadow:0 0 26px rgba(67,182,73,.22)}
+.kpi .tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.dot{width:9px;height:9px;border-radius:1px;display:inline-block;flex:none}
+.kpi .val{font-family:var(--mono);font-size:25px;font-weight:700;margin-top:9px;letter-spacing:-.5px}
+.kpi .val small{font-size:11px;color:var(--faint);font-weight:400;margin-left:3px}
+.kpi .chg{font-family:var(--mono);font-size:11.5px;margin-top:3px;display:flex;align-items:center;gap:5px}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--muted)}
+.kpi.hero .tag{color:var(--vn)} .kpi.hero .val{color:var(--vn-bright);text-shadow:0 0 14px rgba(93,255,102,.5)}
+.hint{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin:0 2px 22px;text-align:right;text-transform:uppercase;letter-spacing:.08em}
+
+.phead{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+.ptitle{font-family:var(--mono);font-size:15px;font-weight:600;margin:0;letter-spacing:.05em;text-transform:uppercase}
+.ptitle::before{content:'▸ ';color:var(--vn)}
+.pnote{font-size:12px;color:var(--muted);margin:5px 0 0}
+.controls{display:flex;gap:6px}
+.controls button{font-family:var(--mono);font-size:11px;color:var(--muted);background:rgba(67,182,73,.06);
+  border:1px solid var(--line);border-radius:4px;padding:6px 11px;cursor:pointer;transition:.12s;text-transform:uppercase;letter-spacing:.06em}
+.controls button:hover{color:var(--vn-bright);box-shadow:0 0 12px rgba(67,182,73,.35);text-shadow:0 0 6px rgba(93,255,102,.7)}
+.controls button:active{filter:brightness(2.2)}
+.controls button.on{background:var(--vn);color:#03140a;border-color:var(--vn);font-weight:700;box-shadow:0 0 16px rgba(67,182,73,.5)}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 6px}
+.chip{font-family:var(--mono);font-size:11px;display:flex;align-items:center;gap:7px;background:rgba(67,182,73,.05);
+  border:1px solid var(--line);border-radius:3px;padding:5px 11px;cursor:pointer;color:var(--muted);transition:.12s;user-select:none}
+@keyframes glitch{0%,100%{text-shadow:0 0 7px rgba(93,255,102,.8)}33%{text-shadow:-1.5px 0 var(--cy),1.5px 0 var(--in)}66%{text-shadow:1.5px 0 var(--cy),-1.5px 0 var(--in)}}
+.chip:hover{color:#fff;border-color:var(--vn);box-shadow:0 0 14px rgba(67,182,73,.45);animation:glitch .4s steps(2,end) infinite}
+.chip:active{filter:brightness(2.4)}
+.chip.off{opacity:.34}
+.chip .v{color:var(--rice);font-weight:600}
+.canvas-box{position:relative;height:380px;margin-top:6px}
+.canvas-sm{position:relative;height:236px;margin-top:6px}
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+
+.bars{margin:14px 2px 16px}
+.bar-row{display:grid;grid-template-columns:118px 1fr 64px;align-items:center;gap:12px;padding:7px 0}
+.bar-row .nm{font-family:var(--mono);font-size:12px;display:flex;align-items:center;gap:8px;color:var(--rice)}
+.track{height:11px;border-radius:2px;background:rgba(67,182,73,.08);overflow:hidden;border:1px solid rgba(67,182,73,.15)}
+.fill{height:100%}
+.bar-row .px{font-family:var(--mono);font-size:13px;text-align:right;font-weight:700}
+
+.foot{font-family:var(--mono);font-size:10.5px;color:var(--faint);border-top:1px solid var(--line);padding-top:16px;margin-top:8px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;text-transform:uppercase;letter-spacing:.06em}
+.src-badge{font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:2px;border:1px solid var(--line);color:var(--muted)}
+.src-badge.live{color:var(--vn-bright);border-color:rgba(67,182,73,.5);box-shadow:0 0 10px rgba(67,182,73,.3);text-shadow:0 0 6px rgba(93,255,102,.6)}
+
+@media(max-width:820px){
+  .kpis{grid-template-columns:repeat(2,1fr)} .kpi.hero{grid-column:1/-1}
+  .grid2{grid-template-columns:1fr} .hint{text-align:left} .mast-meta{text-align:left}
+  .topnav .brand span.txt{display:none}}
+@media(prefers-reduced-motion:reduce){.rez{animation:none}.chip:hover{animation:none}.statusbar .dot{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<nav class="topnav">
+  <a class="brand" href="index.html"><span class="logo"></span><span class="txt">VNGR-TERMINAL</span></a>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="gia-gao.html" class="active">Rice Prices // TERMINAL</a>
+  </div>
+</nav>
+<div class="statusbar">
+  <span><span class="dot"></span><span class="ok">LINK STABLE</span></span>
+  <span>SRC · <span class="cy">OSIRIZ/INFOARROZ</span></span>
+  <span id="sb-feed">FEED · —</span>
+  <span>UNIT · USD/MT FOB</span>
+  <span>BUILD · <span class="cy">RICE-INTEL v0.8</span></span>
+</div>
+
+<div class="wrap">
+  <header class="mast rez" style="animation-delay:.02s">
+    <div>
+      <p class="eyebrow">Rice Intelligence Terminal // Market Grid</p>
+      <h1>World <em>rice prices</em></h1>
+      <p class="sub">Reference export prices for 5% white rice by origin — USD/tonne (FOB). Focus: the competitive position of Vietnamese rice.</p>
+    </div>
+    <div class="mast-meta">
+      <div>SOURCE · <b>Osiriz / InfoArroz</b> <span class="src-badge" id="src">—</span></div>
+      <div id="m-range">PERIOD · —</div>
+      <div>LATEST WEEK · <b class="g" id="m-last">—</b></div>
+      <div>OPERATOR · <b>MR.JAY</b> · AAN FOOD JSC</div>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+  <p class="hint" id="kpi-hint">▲ ▼ = change vs previous week (WoW)</p>
+
+  <section class="panel rez" style="animation-delay:.14s"><i class="br"></i>
+    <div class="phead">
+      <div><h2 class="ptitle">Price trend by origin</h2>
+        <p class="pnote">Click a chip to toggle each country. Vietnam 5% is bolded as the comparison baseline.</p></div>
+      <div class="controls" id="range-ctl">
+        <button data-r="91">3M</button><button data-r="182">6M</button>
+        <button data-r="365" class="on">1Y</button><button data-r="9999">All</button>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="canvas-box"><canvas id="main"></canvas></div>
+  </section>
+
+  <div class="grid2">
+    <section class="panel rez" style="animation-delay:.26s"><i class="br"></i>
+      <div class="phead"><div><h2 class="ptitle">Thailand – Vietnam spread</h2>
+        <p class="pnote">Thai 5% minus Vietnam 5%. The wider the gap, the cheaper Vietnamese rice is relatively.</p></div></div>
+      <div class="canvas-sm"><canvas id="spread"></canvas></div>
+    </section>
+    <section class="panel rez" style="animation-delay:.34s"><i class="br"></i>
+      <div class="phead"><div><h2 class="ptitle">Current levels</h2>
+        <p class="pnote" id="snap-date">Week —</p></div></div>
+      <div class="bars" id="bars"></div>
+    </section>
+  </div>
+
+  <div class="foot">
+    <span>Data: InfoArroz / Osiriz · non-basmati white rice · indicative prices, not transactional quotes.</span>
+    <span id="foot-n">—</span>
+  </div>
+</div>
+
+<script>
+/* ---------- WebGL nano-grid background ---------- */
+(function(){
+  const cvs=document.getElementById('bg'); const gl=cvs.getContext('webgl')||cvs.getContext('experimental-webgl');
+  if(!gl){ document.body.style.background='radial-gradient(circle at 50% 30%,#0a160e,#04080a 70%)'; return; }
+  const vs=`attribute vec2 p;void main(){gl_Position=vec4(p,0.0,1.0);}`;
+  const fs=`precision highp float;uniform vec2 u_res;uniform float u_time;
+  float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+  void main(){
+    vec2 uv=gl_FragCoord.xy/u_res.xy;
+    vec2 p=uv; p.x*=u_res.x/u_res.y;
+    float t=u_time*0.001;
+    p+=vec2(0.0,t*0.22);                       // grid drift
+    float scale=20.0;
+    vec2 f=fract(p*scale);
+    float lw=0.028;
+    float line=clamp(step(f.x,lw)+step(1.0-lw,f.x)+step(f.y,lw)+step(1.0-lw,f.y),0.0,1.0);
+    float dist=length(uv-vec2(0.5,0.46));
+    float pulse=(sin(dist*16.0-t*2.4)*0.5+0.5)*smoothstep(0.95,0.05,dist);  // energy pulse
+    float sy=fract(t*0.06);
+    float sweep=smoothstep(0.07,0.0,abs(uv.y-sy))*0.6;                      // scan sweep
+    float fine=sin(uv.y*u_res.y*1.5)*0.5+0.5;                              // fine scanlines
+    float intensity=line*0.42+pulse*0.22+sweep;
+    intensity*=0.86+0.14*fine;
+    vec3 base=vec3(0.012,0.03,0.02);
+    vec3 green=vec3(0.26,0.71,0.29);
+    vec3 col=base+green*intensity;
+    col+=vec3(0.0,0.05,0.04)*pulse;
+    float vig=smoothstep(1.15,0.32,length(uv-0.5)); col*=vig;
+    col+=(hash(uv+fract(t))-0.5)*0.02;                                     // noise flicker
+    gl_FragColor=vec4(col,1.0);
+  }`;
+  function sh(t,s){const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o;}
+  const prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,vs));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(prog);gl.useProgram(prog);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  const uRes=gl.getUniformLocation(prog,'u_res'),uTime=gl.getUniformLocation(prog,'u_time');
+  function resize(){const d=Math.min(window.devicePixelRatio||1,1.5);cvs.width=innerWidth*d;cvs.height=innerHeight*d;gl.viewport(0,0,cvs.width,cvs.height);}
+  resize();addEventListener('resize',resize);
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches; let run=true;
+  document.addEventListener('visibilitychange',()=>{run=!document.hidden; if(run&&!reduce)requestAnimationFrame(loop);});
+  function draw(ts){gl.uniform2f(uRes,cvs.width,cvs.height);gl.uniform1f(uTime,ts);gl.drawArrays(gl.TRIANGLES,0,3);}
+  function loop(ts){draw(ts); if(run&&!reduce)requestAnimationFrame(loop);}
+  if(reduce){draw(8000);} else {requestAnimationFrame(loop);}
+})();
+
+/* ---------- data + dashboard ---------- */
+const SERIES=[
+  {k:'Viet 5%',label:'Vietnam 5%',hex:'#43b649',hero:true,on:true},
+  {k:'Thai5',label:'Thailand 5%',hex:'#ffb838',on:true},
+  {k:'India 5%',label:'India 5%',hex:'#ff6a3d',on:true},
+  {k:'Pak 5%',label:'Pakistan 5%',hex:'#2fd4ff',on:true},
+  {k:'Burma 5%',label:'Myanmar 5%',hex:'#b07cff',on:false},
+  {k:'Thai 100B',label:'Thai 100B',hex:'#25e8c0',on:false},
+  {k:'India Parb.',label:'India Parboiled',hex:'#ffae6b',on:false},
+  {k:'US LG 2/4',label:'US LG 2/4',hex:'#9fb0bd',on:false},
+];
+const FALLBACK=[{"date":"2024-01-01","INDEX":296,"Thai 100B":670,"Thai5":655,"Viet 5%":655,"India 5%":null,"India Parb.":515,"Pak 5%":595,"Burma 5%":615,"US LG 2/4":745},{"date":"2024-01-08","INDEX":295,"Thai 100B":665,"Thai5":650,"Viet 5%":655,"India 5%":null,"India Parb.":515,"Pak 5%":605,"Burma 5%":610,"US LG 2/4":745},{"date":"2024-01-15","INDEX":297,"Thai 100B":660,"Thai5":645,"Viet 5%":655,"India 5%":null,"India Parb.":520,"Pak 5%":625,"Burma 5%":610,"US LG 2/4":750},{"date":"2024-01-22","INDEX":300,"Thai 100B":665,"Thai5":650,"Viet 5%":655,"India 5%":null,"India Parb.":535,"Pak 5%":630,"Burma 5%":610,"US LG 2/4":750},{"date":"2024-01-29","INDEX":301,"Thai 100B":670,"Thai5":655,"Viet 5%":640,"India 5%":null,"India Parb.":540,"Pak 5%":640,"Burma 5%":615,"US LG 2/4":750},{"date":"2024-02-05","INDEX":299,"Thai 100B":655,"Thai5":640,"Viet 5%":640,"India 5%":null,"India Parb.":545,"Pak 5%":630,"Burma 5%":625,"US LG 2/4":750},{"date":"2024-02-12","INDEX":297,"Thai 100B":630,"Thai5":615,"Viet 5%":640,"India 5%":null,"India Parb.":550,"Pak 5%":620,"Burma 5%":635,"US LG 2/4":765},{"date":"2024-02-19","INDEX":295,"Thai 100B":630,"Thai5":615,"Viet 5%":620,"India 5%":null,"India Parb.":550,"Pak 5%":615,"Burma 5%":625,"US LG 2/4":780},{"date":"2024-02-26","INDEX":291,"Thai 100B":625,"Thai5":610,"Viet 5%":600,"India 5%":null,"India Parb.":550,"Pak 5%":610,"Burma 5%":640,"US LG 2/4":795},{"date":"2024-03-04","INDEX":291,"Thai 100B":630,"Thai5":615,"Viet 5%":580,"India 5%":null,"India Parb.":555,"Pak 5%":600,"Burma 5%":640,"US LG 2/4":815},{"date":"2024-03-11","INDEX":292,"Thai 100B":630,"Thai5":615,"Viet 5%":585,"India 5%":null,"India Parb.":555,"Pak 5%":600,"Burma 5%":635,"US LG 2/4":815},{"date":"2024-03-18","INDEX":291,"Thai 100B":625,"Thai5":610,"Viet 5%":600,"India 5%":null,"India Parb.":550,"Pak 5%":605,"Burma 5%":620,"US LG 2/4":800},{"date":"2024-03-25","INDEX":288,"Thai 100B":615,"Thai5":600,"Viet 5%":585,"India 5%":null,"India Parb.":550,"Pak 5%":605,"Burma 5%":620,"US LG 2/4":800},{"date":"2024-04-01","INDEX":285,"Thai 100B":595,"Thai5":585,"Viet 5%":580,"India 5%":null,"India Parb.":550,"Pak 5%":605,"Burma 5%":630,"US LG 2/4":800},{"date":"2024-04-08","INDEX":283,"Thai 100B":585,"Thai5":575,"Viet 5%":580,"India 5%":null,"India Parb.":550,"Pak 5%":595,"Burma 5%":625,"US LG 2/4":795},{"date":"2024-04-15","INDEX":282,"Thai 100B":590,"Thai5":575,"Viet 5%":580,"India 5%":null,"India Parb.":545,"Pak 5%":590,"Burma 5%":620,"US LG 2/4":795},{"date":"2024-04-22","INDEX":281,"Thai 100B":595,"Thai5":580,"Viet 5%":580,"India 5%":null,"India Parb.":540,"Pak 5%":580,"Burma 5%":610,"US LG 2/4":795},{"date":"2024-04-29","INDEX":281,"Thai 100B":595,"Thai5":580,"Viet 5%":580,"India 5%":null,"India Parb.":540,"Pak 5%":575,"Burma 5%":605,"US LG 2/4":800},{"date":"2024-05-06","INDEX":283,"Thai 100B":600,"Thai5":590,"Viet 5%":585,"India 5%":null,"India Parb.":540,"Pak 5%":575,"Burma 5%":595,"US LG 2/4":795},{"date":"2024-05-13","INDEX":284,"Thai 100B":610,"Thai5":600,"Viet 5%":590,"India 5%":null,"India Parb.":530,"Pak 5%":580,"Burma 5%":595,"US LG 2/4":800},{"date":"2024-05-20","INDEX":286,"Thai 100B":625,"Thai5":610,"Viet 5%":590,"India 5%":null,"India Parb.":535,"Pak 5%":590,"Burma 5%":595,"US LG 2/4":805},{"date":"2024-05-27","INDEX":289,"Thai 100B":635,"Thai5":625,"Viet 5%":580,"India 5%":null,"India Parb.":545,"Pak 5%":595,"Burma 5%":595,"US LG 2/4":805},{"date":"2024-06-03","INDEX":289,"Thai 100B":635,"Thai5":625,"Viet 5%":575,"India 5%":null,"India Parb.":545,"Pak 5%":590,"Burma 5%":590,"US LG 2/4":805},{"date":"2024-06-10","INDEX":288,"Thai 100B":635,"Thai5":625,"Viet 5%":575,"India 5%":null,"India Parb.":545,"Pak 5%":585,"Burma 5%":585,"US LG 2/4":805},{"date":"2024-06-17","INDEX":287,"Thai 100B":630,"Thai5":620,"Viet 5%":570,"India 5%":null,"India Parb.":545,"Pak 5%":585,"Burma 5%":585,"US LG 2/4":805},{"date":"2024-06-24","INDEX":284,"Thai 100B":615,"Thai5":605,"Viet 5%":565,"India 5%":null,"India Parb.":545,"Pak 5%":585,"Burma 5%":585,"US LG 2/4":805},{"date":"2024-07-01","INDEX":283,"Thai 100B":610,"Thai5":600,"Viet 5%":570,"India 5%":null,"India Parb.":545,"Pak 5%":585,"Burma 5%":585,"US LG 2/4":805},{"date":"2024-07-08","INDEX":280,"Thai 100B":595,"Thai5":585,"Viet 5%":570,"India 5%":null,"India Parb.":540,"Pak 5%":585,"Burma 5%":575,"US LG 2/4":805},{"date":"2024-07-15","INDEX":278,"Thai 100B":585,"Thai5":570,"Viet 5%":565,"India 5%":null,"India Parb.":540,"Pak 5%":590,"Burma 5%":570,"US LG 2/4":790},{"date":"2024-07-22","INDEX":278,"Thai 100B":580,"Thai5":565,"Viet 5%":560,"India 5%":null,"India Parb.":545,"Pak 5%":595,"Burma 5%":570,"US LG 2/4":780},{"date":"2024-07-29","INDEX":276,"Thai 100B":580,"Thai5":565,"Viet 5%":560,"India 5%":null,"India Parb.":540,"Pak 5%":575,"Burma 5%":565,"US LG 2/4":780},{"date":"2024-08-05","INDEX":275,"Thai 100B":575,"Thai5":565,"Viet 5%":560,"India 5%":null,"India Parb.":540,"Pak 5%":570,"Burma 5%":560,"US LG 2/4":780},{"date":"2024-08-12","INDEX":274,"Thai 100B":575,"Thai5":560,"Viet 5%":570,"India 5%":null,"India Parb.":535,"Pak 5%":550,"Burma 5%":535,"US LG 2/4":780},{"date":"2024-08-19","INDEX":275,"Thai 100B":580,"Thai5":565,"Viet 5%":580,"India 5%":null,"India Parb.":530,"Pak 5%":545,"Burma 5%":535,"US LG 2/4":780},{"date":"2024-08-26","INDEX":276,"Thai 100B":585,"Thai5":570,"Viet 5%":580,"India 5%":null,"India Parb.":530,"Pak 5%":540,"Burma 5%":530,"US LG 2/4":780},{"date":"2024-09-02","INDEX":276,"Thai 100B":585,"Thai5":575,"Viet 5%":575,"India 5%":null,"India Parb.":530,"Pak 5%":540,"Burma 5%":530,"US LG 2/4":780},{"date":"2024-09-09","INDEX":274,"Thai 100B":580,"Thai5":570,"Viet 5%":570,"India 5%":535,"India Parb.":525,"Pak 5%":540,"Burma 5%":525,"US LG 2/4":765},{"date":"2024-09-16","INDEX":272,"Thai 100B":575,"Thai5":565,"Viet 5%":565,"India 5%":535,"India Parb.":525,"Pak 5%":540,"Burma 5%":530,"US LG 2/4":760},{"date":"2024-09-23","INDEX":273,"Thai 100B":575,"Thai5":560,"Viet 5%":565,"India 5%":535,"India Parb.":530,"Pak 5%":530,"Burma 5%":525,"US LG 2/4":765},{"date":"2024-09-30","INDEX":265,"Thai 100B":555,"Thai5":540,"Viet 5%":555,"India 5%":495,"India Parb.":510,"Pak 5%":520,"Burma 5%":510,"US LG 2/4":780},{"date":"2024-10-07","INDEX":255,"Thai 100B":515,"Thai5":500,"Viet 5%":540,"India 5%":495,"India Parb.":495,"Pak 5%":495,"Burma 5%":505,"US LG 2/4":790},{"date":"2024-10-14","INDEX":253,"Thai 100B":520,"Thai5":500,"Viet 5%":540,"India 5%":490,"India Parb.":490,"Pak 5%":480,"Burma 5%":505,"US LG 2/4":790},{"date":"2024-10-21","INDEX":247,"Thai 100B":525,"Thai5":510,"Viet 5%":535,"India 5%":455,"India Parb.":455,"Pak 5%":475,"Burma 5%":505,"US LG 2/4":790},{"date":"2024-10-28","INDEX":240,"Thai 100B":500,"Thai5":490,"Viet 5%":525,"India 5%":445,"India Parb.":440,"Pak 5%":465,"Burma 5%":505,"US LG 2/4":790},{"date":"2024-11-04","INDEX":238,"Thai 100B":495,"Thai5":485,"Viet 5%":520,"India 5%":445,"India Parb.":440,"Pak 5%":460,"Burma 5%":505,"US LG 2/4":780},{"date":"2024-11-11","INDEX":237,"Thai 100B":495,"Thai5":485,"Viet 5%":520,"India 5%":450,"India Parb.":440,"Pak 5%":455,"Burma 5%":500,"US LG 2/4":760},{"date":"2024-11-18","INDEX":238,"Thai 100B":500,"Thai5":490,"Viet 5%":520,"India 5%":450,"India Parb.":445,"Pak 5%":455,"Burma 5%":500,"US LG 2/4":760},{"date":"2024-11-25","INDEX":239,"Thai 100B":505,"Thai5":495,"Viet 5%":520,"India 5%":455,"India Parb.":450,"Pak 5%":455,"Burma 5%":505,"US LG 2/4":750},{"date":"2024-12-02","INDEX":240,"Thai 100B":510,"Thai5":500,"Viet 5%":520,"India 5%":450,"India Parb.":450,"Pak 5%":455,"Burma 5%":505,"US LG 2/4":745},{"date":"2024-12-09","INDEX":239,"Thai 100B":520,"Thai5":505,"Viet 5%":510,"India 5%":450,"India Parb.":445,"Pak 5%":455,"Burma 5%":505,"US LG 2/4":745},{"date":"2024-12-16","INDEX":239,"Thai 100B":520,"Thai5":505,"Viet 5%":510,"India 5%":450,"India Parb.":445,"Pak 5%":455,"Burma 5%":505,"US LG 2/4":745},{"date":"2024-12-23","INDEX":236,"Thai 100B":515,"Thai5":505,"Viet 5%":485,"India 5%":450,"India Parb.":445,"Pak 5%":455,"Burma 5%":490,"US LG 2/4":745},{"date":"2024-12-30","INDEX":236,"Thai 100B":510,"Thai5":500,"Viet 5%":485,"India 5%":450,"India Parb.":445,"Pak 5%":455,"Burma 5%":490,"US LG 2/4":750},{"date":"2025-01-06","INDEX":231,"Thai 100B":505,"Thai5":495,"Viet 5%":460,"India 5%":450,"India Parb.":440,"Pak 5%":450,"Burma 5%":490,"US LG 2/4":750},{"date":"2025-01-13","INDEX":223,"Thai 100B":485,"Thai5":475,"Viet 5%":425,"India 5%":435,"India Parb.":430,"Pak 5%":450,"Burma 5%":485,"US LG 2/4":750},{"date":"2025-01-20","INDEX":220,"Thai 100B":475,"Thai5":460,"Viet 5%":415,"India 5%":430,"India Parb.":430,"Pak 5%":450,"Burma 5%":485,"US LG 2/4":750},{"date":"2025-01-27","INDEX":216,"Thai 100B":460,"Thai5":445,"Viet 5%":405,"India 5%":425,"India Parb.":430,"Pak 5%":435,"Burma 5%":460,"US LG 2/4":730},{"date":"2025-02-03","INDEX":211,"Thai 100B":450,"Thai5":440,"Viet 5%":405,"India 5%":415,"India Parb.":405,"Pak 5%":415,"Burma 5%":455,"US LG 2/4":720},{"date":"2025-02-10","INDEX":208,"Thai 100B":440,"Thai5":430,"Viet 5%":400,"India 5%":415,"India Parb.":410,"Pak 5%":405,"Burma 5%":445,"US LG 2/4":710},{"date":"2025-02-17","INDEX":204,"Thai 100B":425,"Thai5":415,"Viet 5%":395,"India 5%":410,"India Parb.":405,"Pak 5%":400,"Burma 5%":435,"US LG 2/4":710},{"date":"2025-02-24","INDEX":203,"Thai 100B":425,"Thai5":415,"Viet 5%":395,"India 5%":410,"India Parb.":400,"Pak 5%":385,"Burma 5%":435,"US LG 2/4":705},{"date":"2025-03-03","INDEX":201,"Thai 100B":425,"Thai5":415,"Viet 5%":390,"India 5%":405,"India Parb.":400,"Pak 5%":380,"Burma 5%":430,"US LG 2/4":695},{"date":"2025-03-10","INDEX":200,"Thai 100B":420,"Thai5":410,"Viet 5%":390,"India 5%":405,"India Parb.":400,"Pak 5%":380,"Burma 5%":435,"US LG 2/4":680},{"date":"2025-03-17","INDEX":200,"Thai 100B":420,"Thai5":405,"Viet 5%":395,"India 5%":400,"India Parb.":400,"Pak 5%":385,"Burma 5%":435,"US LG 2/4":675},{"date":"2025-03-24","INDEX":199,"Thai 100B":415,"Thai5":400,"Viet 5%":400,"India 5%":395,"India Parb.":395,"Pak 5%":390,"Burma 5%":425,"US LG 2/4":675},{"date":"2025-03-31","INDEX":197,"Thai 100B":410,"Thai5":400,"Viet 5%":400,"India 5%":385,"India Parb.":390,"Pak 5%":390,"Burma 5%":410,"US LG 2/4":675},{"date":"2025-04-07","INDEX":194,"Thai 100B":405,"Thai5":395,"Viet 5%":400,"India 5%":375,"India Parb.":380,"Pak 5%":390,"Burma 5%":395,"US LG 2/4":675},{"date":"2025-04-14","INDEX":194,"Thai 100B":405,"Thai5":395,"Viet 5%":400,"India 5%":375,"India Parb.":375,"Pak 5%":390,"Burma 5%":390,"US LG 2/4":675},{"date":"2025-04-21","INDEX":194,"Thai 100B":405,"Thai5":395,"Viet 5%":395,"India 5%":375,"India Parb.":375,"Pak 5%":390,"Burma 5%":390,"US LG 2/4":675},{"date":"2025-04-28","INDEX":195,"Thai 100B":410,"Thai5":400,"Viet 5%":395,"India 5%":380,"India Parb.":375,"Pak 5%":390,"Burma 5%":390,"US LG 2/4":675},{"date":"2025-05-05","INDEX":197,"Thai 100B":415,"Thai5":410,"Viet 5%":400,"India 5%":385,"India Parb.":380,"Pak 5%":390,"Burma 5%":385,"US LG 2/4":675},{"date":"2025-05-12","INDEX":197,"Thai 100B":420,"Thai5":410,"Viet 5%":400,"India 5%":380,"India Parb.":375,"Pak 5%":390,"Burma 5%":385,"US LG 2/4":675},{"date":"2025-05-19","INDEX":197,"Thai 100B":415,"Thai5":405,"Viet 5%":400,"India 5%":385,"India Parb.":375,"Pak 5%":390,"Burma 5%":385,"US LG 2/4":675},{"date":"2025-05-26","INDEX":196,"Thai 100B":415,"Thai5":405,"Viet 5%":400,"India 5%":380,"India Parb.":375,"Pak 5%":395,"Burma 5%":380,"US LG 2/4":670},{"date":"2025-06-02","INDEX":197,"Thai 100B":415,"Thai5":405,"Viet 5%":400,"India 5%":385,"India Parb.":375,"Pak 5%":395,"Burma 5%":380,"US LG 2/4":665},{"date":"2025-06-09","INDEX":196,"Thai 100B":410,"Thai5":400,"Viet 5%":390,"India 5%":385,"India Parb.":375,"Pak 5%":395,"Burma 5%":380,"US LG 2/4":660},{"date":"2025-06-16","INDEX":194,"Thai 100B":410,"Thai5":400,"Viet 5%":385,"India 5%":380,"India Parb.":375,"Pak 5%":395,"Burma 5%":380,"US LG 2/4":660},{"date":"2025-06-23","INDEX":193,"Thai 100B":400,"Thai5":390,"Viet 5%":385,"India 5%":380,"India Parb.":375,"Pak 5%":390,"Burma 5%":375,"US LG 2/4":660},{"date":"2025-06-30","INDEX":193,"Thai 100B":400,"Thai5":390,"Viet 5%":385,"India 5%":380,"India Parb.":375,"Pak 5%":390,"Burma 5%":375,"US LG 2/4":660},{"date":"2025-07-07","INDEX":190,"Thai 100B":390,"Thai5":380,"Viet 5%":380,"India 5%":375,"India Parb.":380,"Pak 5%":390,"Burma 5%":370,"US LG 2/4":660},{"date":"2025-07-14","INDEX":190,"Thai 100B":390,"Thai5":375,"Viet 5%":375,"India 5%":375,"India Parb.":375,"Pak 5%":390,"Burma 5%":375,"US LG 2/4":655},{"date":"2025-07-21","INDEX":190,"Thai 100B":390,"Thai5":375,"Viet 5%":380,"India 5%":375,"India Parb.":370,"Pak 5%":390,"Burma 5%":370,"US LG 2/4":655},{"date":"2025-07-28","INDEX":189,"Thai 100B":385,"Thai5":375,"Viet 5%":385,"India 5%":375,"India Parb.":375,"Pak 5%":380,"Burma 5%":365,"US LG 2/4":650},{"date":"2025-08-04","INDEX":189,"Thai 100B":380,"Thai5":370,"Viet 5%":390,"India 5%":380,"India Parb.":375,"Pak 5%":370,"Burma 5%":365,"US LG 2/4":650},{"date":"2025-08-11","INDEX":187,"Thai 100B":370,"Thai5":360,"Viet 5%":395,"India 5%":375,"India Parb.":370,"Pak 5%":365,"Burma 5%":360,"US LG 2/4":650},{"date":"2025-08-18","INDEX":186,"Thai 100B":365,"Thai5":355,"Viet 5%":400,"India 5%":375,"India Parb.":365,"Pak 5%":355,"Burma 5%":360,"US LG 2/4":620},{"date":"2025-08-25","INDEX":185,"Thai 100B":365,"Thai5":355,"Viet 5%":390,"India 5%":375,"India Parb.":365,"Pak 5%":355,"Burma 5%":360,"US LG 2/4":600},{"date":"2025-09-01","INDEX":183,"Thai 100B":365,"Thai5":355,"Viet 5%":375,"India 5%":375,"India Parb.":360,"Pak 5%":350,"Burma 5%":350,"US LG 2/4":600},{"date":"2025-09-08","INDEX":183,"Thai 100B":365,"Thai5":355,"Viet 5%":380,"India 5%":375,"India Parb.":360,"Pak 5%":355,"Burma 5%":350,"US LG 2/4":595},{"date":"2025-09-15","INDEX":184,"Thai 100B":370,"Thai5":360,"Viet 5%":375,"India 5%":375,"India Parb.":355,"Pak 5%":360,"Burma 5%":330,"US LG 2/4":595},{"date":"2025-09-22","INDEX":185,"Thai 100B":370,"Thai5":360,"Viet 5%":380,"India 5%":375,"India Parb.":360,"Pak 5%":365,"Burma 5%":330,"US LG 2/4":605},{"date":"2025-09-29","INDEX":182,"Thai 100B":360,"Thai5":350,"Viet 5%":375,"India 5%":375,"India Parb.":360,"Pak 5%":355,"Burma 5%":325,"US LG 2/4":605},{"date":"2025-10-06","INDEX":180,"Thai 100B":350,"Thai5":340,"Viet 5%":375,"India 5%":370,"India Parb.":350,"Pak 5%":345,"Burma 5%":325,"US LG 2/4":605},{"date":"2025-10-13","INDEX":178,"Thai 100B":345,"Thai5":335,"Viet 5%":375,"India 5%":365,"India Parb.":350,"Pak 5%":350,"Burma 5%":325,"US LG 2/4":600},{"date":"2025-10-20","INDEX":177,"Thai 100B":345,"Thai5":335,"Viet 5%":370,"India 5%":365,"India Parb.":350,"Pak 5%":335,"Burma 5%":325,"US LG 2/4":600},{"date":"2025-10-27","INDEX":175,"Thai 100B":345,"Thai5":335,"Viet 5%":370,"India 5%":355,"India Parb.":350,"Pak 5%":330,"Burma 5%":325,"US LG 2/4":595},{"date":"2025-11-03","INDEX":174,"Thai 100B":345,"Thai5":335,"Viet 5%":365,"India 5%":350,"India Parb.":345,"Pak 5%":335,"Burma 5%":325,"US LG 2/4":585},{"date":"2025-11-10","INDEX":171,"Thai 100B":340,"Thai5":330,"Viet 5%":355,"India 5%":345,"India Parb.":345,"Pak 5%":335,"Burma 5%":320,"US LG 2/4":570},{"date":"2025-11-17","INDEX":170,"Thai 100B":340,"Thai5":330,"Viet 5%":355,"India 5%":335,"India Parb.":345,"Pak 5%":340,"Burma 5%":325,"US LG 2/4":570},{"date":"2025-11-24","INDEX":175,"Thai 100B":360,"Thai5":350,"Viet 5%":360,"India 5%":340,"India Parb.":350,"Pak 5%":340,"Burma 5%":325,"US LG 2/4":565},{"date":"2025-12-01","INDEX":176,"Thai 100B":370,"Thai5":360,"Viet 5%":360,"India 5%":340,"India Parb.":350,"Pak 5%":345,"Burma 5%":330,"US LG 2/4":555},{"date":"2025-12-08","INDEX":180,"Thai 100B":390,"Thai5":380,"Viet 5%":360,"India 5%":345,"India Parb.":350,"Pak 5%":350,"Burma 5%":335,"US LG 2/4":555},{"date":"2025-12-15","INDEX":184,"Thai 100B":405,"Thai5":395,"Viet 5%":365,"India 5%":350,"India Parb.":355,"Pak 5%":355,"Burma 5%":340,"US LG 2/4":565},{"date":"2025-12-22","INDEX":186,"Thai 100B":405,"Thai5":400,"Viet 5%":365,"India 5%":355,"India Parb.":355,"Pak 5%":355,"Burma 5%":345,"US LG 2/4":565},{"date":"2025-12-29","INDEX":186,"Thai 100B":415,"Thai5":405,"Viet 5%":360,"India 5%":355,"India Parb.":360,"Pak 5%":360,"Burma 5%":350,"US LG 2/4":565},{"date":"2026-01-05","INDEX":185,"Thai 100B":410,"Thai5":400,"Viet 5%":360,"India 5%":350,"India Parb.":355,"Pak 5%":365,"Burma 5%":350,"US LG 2/4":565},{"date":"2026-01-12","INDEX":183,"Thai 100B":390,"Thai5":380,"Viet 5%":360,"India 5%":350,"India Parb.":355,"Pak 5%":375,"Burma 5%":355,"US LG 2/4":565},{"date":"2026-01-19","INDEX":182,"Thai 100B":385,"Thai5":375,"Viet 5%":360,"India 5%":350,"India Parb.":350,"Pak 5%":370,"Burma 5%":355,"US LG 2/4":565},{"date":"2026-01-26","INDEX":182,"Thai 100B":395,"Thai5":385,"Viet 5%":350,"India 5%":350,"India Parb.":355,"Pak 5%":370,"Burma 5%":350,"US LG 2/4":565},{"date":"2026-02-02","INDEX":184,"Thai 100B":400,"Thai5":390,"Viet 5%":360,"India 5%":350,"India Parb.":360,"Pak 5%":370,"Burma 5%":350,"US LG 2/4":565},{"date":"2026-02-09","INDEX":183,"Thai 100B":400,"Thai5":390,"Viet 5%":355,"India 5%":345,"India Parb.":355,"Pak 5%":365,"Burma 5%":350,"US LG 2/4":565},{"date":"2026-02-16","INDEX":182,"Thai 100B":395,"Thai5":385,"Viet 5%":355,"India 5%":345,"India Parb.":350,"Pak 5%":365,"Burma 5%":350,"US LG 2/4":565},{"date":"2026-02-23","INDEX":182,"Thai 100B":390,"Thai5":380,"Viet 5%":355,"India 5%":350,"India Parb.":350,"Pak 5%":365,"Burma 5%":355,"US LG 2/4":565},{"date":"2026-03-02","INDEX":182,"Thai 100B":390,"Thai5":380,"Viet 5%":355,"India 5%":350,"India Parb.":350,"Pak 5%":360,"Burma 5%":355,"US LG 2/4":565},{"date":"2026-03-09","INDEX":178,"Thai 100B":375,"Thai5":370,"Viet 5%":350,"India 5%":345,"India Parb.":345,"Pak 5%":350,"Burma 5%":355,"US LG 2/4":550},{"date":"2026-03-16","INDEX":176,"Thai 100B":370,"Thai5":360,"Viet 5%":350,"India 5%":340,"India Parb.":345,"Pak 5%":345,"Burma 5%":355,"US LG 2/4":550},{"date":"2026-03-23","INDEX":176,"Thai 100B":370,"Thai5":360,"Viet 5%":355,"India 5%":340,"India Parb.":350,"Pak 5%":350,"Burma 5%":350,"US LG 2/4":545},{"date":"2026-03-30","INDEX":176,"Thai 100B":370,"Thai5":360,"Viet 5%":360,"India 5%":335,"India Parb.":345,"Pak 5%":345,"Burma 5%":355,"US LG 2/4":545},{"date":"2026-04-06","INDEX":178,"Thai 100B":380,"Thai5":370,"Viet 5%":365,"India 5%":335,"India Parb.":345,"Pak 5%":345,"Burma 5%":355,"US LG 2/4":550},{"date":"2026-04-13","INDEX":181,"Thai 100B":390,"Thai5":380,"Viet 5%":375,"India 5%":340,"India Parb.":350,"Pak 5%":350,"Burma 5%":365,"US LG 2/4":550},{"date":"2026-04-20","INDEX":184,"Thai 100B":395,"Thai5":385,"Viet 5%":380,"India 5%":345,"India Parb.":345,"Pak 5%":360,"Burma 5%":375,"US LG 2/4":540},{"date":"2026-04-27","INDEX":187,"Thai 100B":400,"Thai5":390,"Viet 5%":390,"India 5%":350,"India Parb.":345,"Pak 5%":360,"Burma 5%":385,"US LG 2/4":540},{"date":"2026-05-04","INDEX":187,"Thai 100B":405,"Thai5":395,"Viet 5%":395,"India 5%":350,"India Parb.":345,"Pak 5%":355,"Burma 5%":385,"US LG 2/4":540},{"date":"2026-05-11","INDEX":187,"Thai 100B":410,"Thai5":400,"Viet 5%":400,"India 5%":340,"India Parb.":340,"Pak 5%":350,"Burma 5%":390,"US LG 2/4":540},{"date":"2026-05-18","INDEX":194,"Thai 100B":435,"Thai5":425,"Viet 5%":415,"India 5%":345,"India Parb.":330,"Pak 5%":350,"Burma 5%":395,"US LG 2/4":540},{"date":"2026-05-25","INDEX":195,"Thai 100B":445,"Thai5":435,"Viet 5%":415,"India 5%":345,"India Parb.":330,"Pak 5%":350,"Burma 5%":395,"US LG 2/4":540},{"date":"2026-06-01","INDEX":198,"Thai 100B":465,"Thai5":455,"Viet 5%":415,"India 5%":340,"India Parb.":330,"Pak 5%":360,"Burma 5%":395,"US LG 2/4":540},{"date":"2026-06-08","INDEX":201,"Thai 100B":470,"Thai5":460,"Viet 5%":415,"India 5%":345,"India Parb.":335,"Pak 5%":385,"Burma 5%":420,"US LG 2/4":540},{"date":"2026-06-15","INDEX":203,"Thai 100B":480,"Thai5":470,"Viet 5%":410,"India 5%":350,"India Parb.":340,"Pak 5%":390,"Burma 5%":455,"US LG 2/4":535},{"date":"2026-06-22","INDEX":203,"Thai 100B":485,"Thai5":475,"Viet 5%":410,"India 5%":350,"India Parb.":340,"Pak 5%":390,"Burma 5%":460,"US LG 2/4":535}];
+const fmtD=s=>{const d=new Date(s);return d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear();};
+let RAW,last,prev,rangeDays=365,mainChart,spreadChart,state={};
+
+async function loadData(){
+  try{const r=await fetch('gia-gao.json',{cache:'no-store'});
+    if(r.ok){const j=await r.json();if(Array.isArray(j)&&j.length)return{rows:j,live:true};}}catch(e){console.warn('gia-gao.json?',e);}
+  return{rows:FALLBACK,live:false};
+}
+function deltaHTML(now,was){if(now==null||was==null)return '<span class="chg flat">— n/a</span>';
+  const d=now-was,cls=d>0?'up':d<0?'down':'flat',ar=d>0?'▲':d<0?'▼':'■';
+  return '<span class="chg '+cls+'">'+ar+' '+(d>0?'+':'')+d+' USD</span>';}
+function slice(days){if(days>=9999)return RAW;const cut=new Date(last.date);cut.setDate(cut.getDate()-days);
+  return RAW.filter(r=>new Date(r.date)>=cut);}
+const gridc='rgba(67,182,73,.12)';
+
+function init(rows,live){
+  RAW=rows.slice().sort((a,b)=>a.date<b.date?-1:1);last=RAW[RAW.length-1];prev=RAW[RAW.length-2];
+  const b=document.getElementById('src');b.textContent=live?'LIVE':'OFFLINE';b.className='src-badge'+(live?' live':'');
+  document.getElementById('m-last').textContent=fmtD(last.date);
+  document.getElementById('m-range').textContent='PERIOD · '+fmtD(RAW[0].date)+' → '+fmtD(last.date);
+  document.getElementById('foot-n').textContent=RAW.length+' weeks · updated '+fmtD(last.date);
+  document.getElementById('snap-date').textContent='Week '+fmtD(last.date)+' (USD/t)';
+  document.getElementById('sb-feed').innerHTML='FEED · <span class="cy">'+fmtD(last.date)+'</span>';
+
+  const kk=['Viet 5%','Thai5','India 5%','Pak 5%'];let kh='';
+  kk.forEach(k=>{const s=SERIES.find(x=>x.k===k);
+    kh+='<div class="kpi"><div class="tag"><span class="dot" style="background:'+s.hex+';box-shadow:0 0 7px '+s.hex+'"></span>'+s.label+'</div>'
+      +'<div class="val">'+(last[k]??'—')+'<small>USD/t</small></div>'+deltaHTML(last[k],prev[k])+'</div>';});
+  const sp=last['Thai5']-last['Viet 5%'],spP=prev['Thai5']-prev['Viet 5%'];
+  kh+='<div class="kpi hero"><div class="tag"><span class="dot" style="background:var(--vn);box-shadow:0 0 8px var(--vn)"></span>Thailand–Vietnam spread</div>'
+    +'<div class="val">'+sp+'<small>USD/t</small></div>'+deltaHTML(sp,spP)+'</div>';
+  document.getElementById('kpis').innerHTML=kh;
+
+  const snap=SERIES.map(s=>({...s,v:last[s.k]})).filter(s=>s.v!=null).sort((a,b)=>b.v-a.v);
+  const mx=Math.max(...snap.map(s=>s.v));
+  document.getElementById('bars').innerHTML=snap.map(s=>
+    '<div class="bar-row"><div class="nm"><span class="dot" style="background:'+s.hex+';box-shadow:0 0 6px '+s.hex+'"></span>'+s.label+'</div>'
+    +'<div class="track"><div class="fill" style="width:'+(s.v/mx*100)+'%;background:'+s.hex+';box-shadow:0 0 10px '+s.hex+'"></div></div>'
+    +'<div class="px" style="color:'+s.hex+'">'+s.v+'</div></div>').join('');
+
+  SERIES.forEach(s=>state[s.k]=s.on);
+  const leg=document.getElementById('legend');
+  leg.innerHTML=SERIES.map(s=>'<span class="chip'+(s.on?'':' off')+'" data-k="'+s.k+'"><span class="dot" style="background:'+s.hex+';box-shadow:0 0 6px '+s.hex+'"></span>'+s.label+' <span class="v">'+(last[s.k]??'–')+'</span></span>').join('');
+  leg.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{const k=ch.dataset.k;state[k]=!state[k];ch.classList.toggle('off',!state[k]);buildMain();}));
+  document.getElementById('range-ctl').querySelectorAll('button').forEach(bt=>bt.addEventListener('click',()=>{
+    document.querySelectorAll('#range-ctl button').forEach(x=>x.classList.remove('on'));bt.classList.add('on');rangeDays=+bt.dataset.r;rebuild();}));
+
+  Chart.defaults.font.family="'IBM Plex Mono',monospace";Chart.defaults.font.size=11;Chart.defaults.color='#6f9b7d';
+  rebuild();
+}
+function buildMain(){const rows=slice(rangeDays),labels=rows.map(r=>r.date);
+  const ds=SERIES.filter(s=>state[s.k]).map(s=>({label:s.label,data:rows.map(r=>r[s.k]),borderColor:s.hex,backgroundColor:s.hex,
+    borderWidth:s.hero?3.2:1.5,pointRadius:0,pointHoverRadius:4,tension:.25,spanGaps:true,order:s.hero?0:1}));
+  if(mainChart)mainChart.destroy();
+  mainChart=new Chart(document.getElementById('main'),{type:'line',data:{labels,datasets:ds},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(4,10,8,.94)',borderColor:'#43b649',borderWidth:1,padding:11,
+        titleColor:'#5dff66',bodyColor:'#d7ecd9',callbacks:{title:i=>fmtD(i[0].label),label:c=>' '+c.dataset.label+': '+c.parsed.y+' USD/t'}}},
+      scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,callback:function(v){const d=new Date(this.getLabelForValue(v));return (d.getMonth()+1)+'/'+String(d.getFullYear()).slice(2)}}},
+        y:{grid:{color:gridc},border:{display:false}}},animation:{duration:480}}});
+}
+function buildSpread(){const rows=slice(rangeDays),labels=rows.map(r=>r.date);
+  const sp=rows.map(r=>(r['Thai5']!=null&&r['Viet 5%']!=null)?r['Thai5']-r['Viet 5%']:null);
+  if(spreadChart)spreadChart.destroy();
+  spreadChart=new Chart(document.getElementById('spread'),{type:'line',
+    data:{labels,datasets:[{data:sp,borderColor:'#5dff66',borderWidth:2,fill:true,backgroundColor:'rgba(67,182,73,.16)',pointRadius:0,pointHoverRadius:4,tension:.25,spanGaps:true}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(4,10,8,.94)',borderColor:'#43b649',borderWidth:1,padding:10,
+        titleColor:'#5dff66',bodyColor:'#5dff66',callbacks:{title:i=>fmtD(i[0].label),label:c=>' Thailand above Vietnam '+c.parsed.y+' USD/t'}}},
+      scales:{x:{grid:{display:false},ticks:{maxTicksLimit:6,callback:function(v){const d=new Date(this.getLabelForValue(v));return (d.getMonth()+1)+'/'+String(d.getFullYear()).slice(2)}}},
+        y:{grid:{color:gridc},border:{display:false}}},animation:{duration:480}}});
+}
+function rebuild(){buildMain();buildSpread();}
+(async()=>{const {rows,live}=await loadData();init(rows,live);})();
+</script>
+</body>
+</html>
